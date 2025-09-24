@@ -4,6 +4,8 @@ Unindo pessoas por um propósito comum.
 
 O trabalho voluntário enfrenta desafios significativos, como a falta de organização e divulgação, que desmotivam potenciais voluntários e desperdiçam recursos valiosos. As organizações sem fins lucrativos também têm dificuldade em engajar e reter voluntários de forma eficiente.
 
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cnbb.org.br%2Fsemana-reflete-sobre-o-voluntariado-no-brasil-e-a-importancia-da-solidariedade-na-atualidade%2F&psig=AOvVaw3w4iZhGrai06wX9FFvEsEh&ust=1758809935538000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNDuvd3L8Y8DFQAAAAAdAAAAABAE
+
 ---
 
 Canto do Bem nasce para resolver esses problemas.

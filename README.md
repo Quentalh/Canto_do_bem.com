@@ -4,7 +4,7 @@ Unindo pessoas por um propósito comum.
 
 O trabalho voluntário enfrenta desafios significativos, como a falta de organização e divulgação, que desmotivam potenciais voluntários e desperdiçam recursos valiosos. As organizações sem fins lucrativos também têm dificuldade em engajar e reter voluntários de forma eficiente.
 
-<img width="1720" height="1080" alt="Image" src="https://github.com/user-attachments/assets/126e5d4e-12ba-49db-a01c-03856aeb834f" />
+<img width="1320" height="680" alt="Image" src="https://github.com/user-attachments/assets/126e5d4e-12ba-49db-a01c-03856aeb834f" />
 
 ---
 

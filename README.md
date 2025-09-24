@@ -2,13 +2,11 @@
 
 Unindo pessoas por um propósito comum.
 
-O trabalho voluntário enfrenta desafios significativos, como a falta de organização e divulgação, que desmotivam potenciais voluntários e desperdiçam recursos valiosos. As organizações sem fins lucrativos também têm dificuldade em engajar e reter voluntários de forma eficiente.
+O trabalho voluntário enfrenta desafios significativos, como a falta de organização e divulgação, que desmotivam potenciais voluntários e desperdiçam recursos valiosos. As organizações sem fins lucrativos também têm dificuldade em engajar e reter voluntários de forma eficiente. Canto do Bem nasce para resolver esses problemas.
 
 ![Image](https://github.com/user-attachments/assets/d638e13d-8744-4793-a5e5-45d4b1551941)
 
 ---
-
-Canto do Bem nasce para resolver esses problemas.
 
 ## Qual a nossa Missão?
 

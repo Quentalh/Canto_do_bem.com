@@ -31,6 +31,27 @@
             "senha": "abavsg123Q",
             "interesses": [],
             "eventos_participando": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Heitor",
+            "email": "heitorquental321@gmail.com",
+            "senha": "Patbit09",
+            "interesses": [],
+            "eventos_participando": [
+                "evento 2"
+            ]
+        },
+        {
+            "tipo": "usuario",
+            "nome": "exemplo",
+            "email": "exemplo@gmail.com",
+            "senha": "Senhaexemplo1.com",
+            "interesses": [],
+            "eventos_participando": [
+                "evento exemplo",
+                "ex3"
+            ]
         }
     ],
     "ongs": [
@@ -40,8 +61,68 @@
             "email": "dobem@gmail.com",
             "senha": "Voluntario123",
             "descricao": "Somos uma ong voltada para ajudar animais em situação de rua",
+            "eventos_criados": [
+                "evento 2",
+                "ex3"
+            ]
+        },
+        {
+            "tipo": "ong",
+            "nome": "ex2",
+            "email": "ex@gmail.com",
+            "senha": "Exsenha2",
+            "descricao": "mimimi",
+            "eventos_criados": []
+        },
+        {
+            "tipo": "ong",
+            "nome": "ex3",
+            "email": "dhahdah@dhahda.com",
+            "senha": "Heitor1023",
+            "descricao": "mimsao",
+            "eventos_criados": []
+        },
+        {
+            "tipo": "ong",
+            "nome": "ex4",
+            "email": "dadad@.com",
+            "senha": "Mimsenha20",
+            "descricao": "lodpasod",
             "eventos_criados": []
         }
     ],
-    "eventos": []
+    "eventos": [
+        {
+            "nome": "evento exemplo",
+            "descricao": "exemplo",
+            "data": "21/10/2025",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "usuario"
+        },
+        {
+            "nome": "evento 2",
+            "descricao": "exemplo",
+            "data": "01/01/2026",
+            "cidade": "Recife",
+            "criado_por": "cantodobem",
+            "tipo_criador": "ong"
+        },
+        {
+            "nome": "ex3",
+            "descricao": "ldsoasd",
+            "data": "30/05/2003",
+            "cidade": "Recife",
+            "criado_por": "cantodobem",
+            "tipo_criador": "ong"
+        },
+        {
+            "nome": "exdata",
+            "descricao": "data",
+            "data": "20/05/2026",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "usuario"
+        }
+    ]
 }

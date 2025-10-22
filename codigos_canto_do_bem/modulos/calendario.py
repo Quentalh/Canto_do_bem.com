@@ -30,7 +30,7 @@ def adicionar_evento_calendario(usuario_logado):
 
     console.print("Eventos disponíveis:")
     for idx, evento in enumerate(todos_eventos, 1):
-        console.print(f"{idx}. {evento['titulo']} - Criado por: {evento['criador']}")
+        console.print(f"{idx}. {evento['nome']} - Criado por: {evento['criado_por']}")
 
     escolha = input("\nDigite o número do evento que deseja adicionar: ").strip()
 
@@ -38,7 +38,7 @@ def adicionar_evento_calendario(usuario_logado):
         console.print("[bold red]Escolha inválida![/bold red]")
         return
 
-    evento_escolhido = todos_eventos[int(escolha) - 1]["titulo"]
+    evento_escolhido = todos_eventos[int(escolha) - 1]["nome"]
 
     if evento_escolhido in usuario_logado["eventos_participando"]:
         console.print("[bold yellow]Você já está participando deste evento.[/bold yellow]")

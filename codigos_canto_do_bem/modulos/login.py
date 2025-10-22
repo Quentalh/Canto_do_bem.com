@@ -6,15 +6,20 @@ console = Console()
 
 def login():
     dados = carregar_dados()
-    console.print(Panel("Login", style="bold cyan"))
-    email = input("E-mail: ")
-    senha = input("Senha: ")
+    console.print(Panel("🔐 Login", style="bold cyan"))
 
-    for tipo in ["usuarios", "ongs"]:
-        for usuario in dados[tipo]:
-            if usuario["email"] == email and usuario["senha"] == senha:
-                console.print(f"[bold green]Login bem-sucedido! Bem-vindo(a), {usuario['nome']}![/bold green]")
-                return usuario
+    while True:  # Loop até login ser bem-sucedido
+        email = input("E-mail: ").strip()
+        senha = input("Senha: ").strip()
 
-    console.print("[bold red]E-mail ou senha incorretos.[/bold red]")
-    return None
+        # Busca em usuários
+        usuario = next((u for u in dados["usuarios"] if u["email"] == email and u["senha"] == senha), None)
+        # Busca em ONGs
+        if not usuario:
+            usuario = next((o for o in dados["ongs"] if o["email"] == email and o["senha"] == senha), None)
+
+        if usuario:
+            console.print(f"[bold green]Login realizado com sucesso! Bem-vindo(a) {usuario['nome']}[/bold green]")
+            return usuario
+        else:
+            console.print("[bold red]E-mail ou senha incorretos! Tente novamente.[/bold red]")

@@ -45,7 +45,7 @@ def menu_usuario(usuario_logado):
         console.print("1 - Editar Perfil")
         console.print("2 - Ver Calendário Pessoal")
         console.print("3 - Adicionar Evento ao Calendário")
-        console.print("4 - Criar Evento (como voluntário)")
+        console.print("4 - Criar Evento/Voluntariado")
         console.print("5 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
@@ -69,13 +69,19 @@ def menu_ong(ong_logada):
     while True:
         console.print(Panel(f"🏢 Menu da ONG - {ong_logada['nome']}", style="bold cyan"))
         console.print("1 - Criar Evento/Voluntariado")
-        console.print("2 - Sair")
+        console.print("2 - Gerenciar Perfil da ONG")
+        console.print("3 - Ver Calendário de Eventos Criados")
+        console.print("4 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
 
         if opcao == "1":
             criar_evento(ong_logada)
         elif opcao == "2":
+            editar_perfil(ong_logada)  # Permite editar descrição e dados da ONG
+        elif opcao == "3":
+            ver_calendario(ong_logada)  # Visualizar eventos que a ONG criou
+        elif opcao == "4":
             console.print("[bold yellow]Voltando ao menu principal...[/bold yellow]")
             break
         else:
@@ -84,4 +90,3 @@ def menu_ong(ong_logada):
 
 if __name__ == "__main__":
     menu_principal()
-

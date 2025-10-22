@@ -1,5 +1,87 @@
 {
-    "usuarios": [],
+    "usuarios": [
+        {
+            "tipo": "usuario",
+            "nome": "Heitor",
+            "email": "heitorquental321@gmail.com",
+            "senha": "Patbit09",
+            "interesses": [],
+            "eventos_participando": [
+                {
+                    "nome": "evento 2",
+                    "data": "01/01/2026"
+                }
+            ]
+        },
+        {
+            "tipo": "usuario",
+            "nome": "lopes",
+            "email": "exemplo@gmail.com",
+            "senha": "Senhaexemplo1.com",
+            "interesses": [
+                "mimim"
+            ],
+            "eventos_participando": [
+                {
+                    "nome": "evento exemplo",
+                    "data": "21/10/2025"
+                },
+                {
+                    "nome": "ex3",
+                    "data": "30/05/2003"
+                }
+            ]
+        }
+    ],
     "ongs": [],
-    "eventos": []
+    "eventos": [
+        {
+            "nome": "evento exemplo",
+            "descricao": "exemplo",
+            "data": "21/10/2025",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "usuario"
+        },
+        {
+            "nome": "evento 2",
+            "descricao": "exemplo",
+            "data": "01/01/2026",
+            "cidade": "Recife",
+            "criado_por": "cantodobem",
+            "tipo_criador": "ong"
+        },
+        {
+            "nome": "ex3",
+            "descricao": "ldsoasd",
+            "data": "30/05/2003",
+            "cidade": "Recife",
+            "criado_por": "cantodobem",
+            "tipo_criador": "ong"
+        },
+        {
+            "nome": "exdata",
+            "descricao": "data",
+            "data": "20/05/2026",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "usuario"
+        },
+        {
+            "nome": "evento sopão",
+            "descricao": "ajudar moradores de rua com um sopão",
+            "data": "06/09/2026",
+            "cidade": "recife",
+            "criado_por": "joao",
+            "tipo_criador": "usuario"
+        },
+        {
+            "nome": "Heitor",
+            "descricao": "dasdad",
+            "data": "30/01/2200",
+            "cidade": "Recife",
+            "criado_por": "cantodobem",
+            "tipo_criador": "ong"
+        }
+    ]
 }

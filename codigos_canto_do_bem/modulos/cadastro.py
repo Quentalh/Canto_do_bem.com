@@ -44,7 +44,7 @@ def cadastrar_usuario():
     while True:
         email = input("E-mail: ").strip()
         if not validar_email(email):
-            console.print("[bold red]E-mail inválido! Deve conter '@' e '.' no email cadastrado.[/bold red]")
+            console.print("[bold red]E-mail inválido! Deve conter '@' e um formato válido.[/bold red]")
         elif any(u["email"] == email for u in dados["usuarios"]):
             console.print("[bold red]E-mail já cadastrado.[/bold red]")
         else:
@@ -67,7 +67,7 @@ def cadastrar_usuario():
         "email": email,
         "senha": senha,
         "interesses": [],
-        "eventos_participando": []
+        "eventos_participando": [] 
     }
 
     dados["usuarios"].append(novo_usuario)

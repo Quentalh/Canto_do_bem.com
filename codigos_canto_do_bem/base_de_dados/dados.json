@@ -1,47 +1,5 @@
 {
-    "usuarios": [
-        {
-            "tipo": "usuario",
-            "nome": "pedro",
-            "email": "pedrocastro",
-            "senha": "123",
-            "interesses": [],
-            "eventos_participando": []
-        },
-        {
-            "tipo": "usuario",
-            "nome": "pedro",
-            "email": "pedro@gmail.com",
-            "senha": "Pedro123",
-            "interesses": [],
-            "eventos_participando": []
-        },
-        {
-            "tipo": "usuario",
-            "nome": "& C:/Users/Pedro/AppData/Local/Programs/Python/Python312/python.exe \"d:/Pedro Castro/Documents/Projeto voluntariado/main.py\"",
-            "email": "caqui@gmail.com",
-            "senha": "Ola12345",
-            "interesses": [],
-            "eventos_participando": []
-        },
-        {
-            "tipo": "usuario",
-            "nome": "josé",
-            "email": "jose@gmail.com",
-            "senha": "abavsg123Q",
-            "interesses": [],
-            "eventos_participando": []
-        }
-    ],
-    "ongs": [
-        {
-            "tipo": "ong",
-            "nome": "cantodobem",
-            "email": "dobem@gmail.com",
-            "senha": "Voluntario123",
-            "descricao": "Somos uma ong voltada para ajudar animais em situação de rua",
-            "eventos_criados": []
-        }
-    ],
+    "usuarios": [],
+    "ongs": [],
     "eventos": []
 }

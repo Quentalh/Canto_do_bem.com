@@ -33,7 +33,7 @@ def adicionar_evento_calendario(usuario_logado):
 
     console.print("Eventos disponíveis:")
     for idx, evento in enumerate(todos_eventos, 1):
-        console.print(f"{idx}. {evento['nome']} - Criado por: {evento['criado_por']}")
+        console.print(f"{idx}. {evento['nome']} - Criado por: {evento['criado_por']} (Data: {evento['data']})")
 
     escolha = input("\nDigite o número do evento que deseja adicionar: ").strip()
 

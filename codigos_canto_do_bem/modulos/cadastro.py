@@ -67,7 +67,7 @@ def cadastrar_usuario():
         "email": email,
         "senha": senha,
         "interesses": [],
-        "eventos_participando": []
+        "eventos_participando": [] 
     }
 
     dados["usuarios"].append(novo_usuario)

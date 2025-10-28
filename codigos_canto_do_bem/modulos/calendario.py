@@ -12,7 +12,11 @@ def ver_calendario(usuario_logado):
         console.print("[bold yellow]Você ainda não adicionou nenhum evento.[/bold yellow]")
     else:
         for evento in usuario_logado["eventos_participando"]:
-            console.print(f"- {evento}")
+            if isinstance(evento, dict):
+                console.print(f"- {evento['nome']} (Data: {evento['data']})")
+            elif isinstance(evento, str):
+                console.print(f"- {evento} (Data: N/A - atualize este evento)")
+
 
     input("\nPressione ENTER para voltar...")
 
@@ -22,7 +26,6 @@ def adicionar_evento_calendario(usuario_logado):
 
     console.print(Panel("Adicionar evento ao calendário", style="bold cyan"))
 
-    # listar eventos disponíveis
     todos_eventos = dados.get("eventos", [])
     if not todos_eventos:
         console.print("[bold yellow]Nenhum evento disponível ainda.[/bold yellow]")
@@ -30,7 +33,7 @@ def adicionar_evento_calendario(usuario_logado):
 
     console.print("Eventos disponíveis:")
     for idx, evento in enumerate(todos_eventos, 1):
-        console.print(f"{idx}. {evento['nome']} - Criado por: {evento['criado_por']}")
+        console.print(f"{idx}. {evento['nome']} - Criado por: {evento['criado_por']} (Data: {evento['data']})")
 
     escolha = input("\nDigite o número do evento que deseja adicionar: ").strip()
 
@@ -38,19 +41,36 @@ def adicionar_evento_calendario(usuario_logado):
         console.print("[bold red]Escolha inválida![/bold red]")
         return
 
-    evento_escolhido = todos_eventos[int(escolha) - 1]["nome"]
+    evento_escolhido_obj = todos_eventos[int(escolha) - 1]
+    nome_evento_escolhido = evento_escolhido_obj["nome"]
 
-    if evento_escolhido in usuario_logado["eventos_participando"]:
+    ja_participa = False
+    for item in usuario_logado["eventos_participando"]:
+        nome_na_lista = ""
+        if isinstance(item, dict):
+            nome_na_lista = item.get("nome")
+        elif isinstance(item, str):
+            nome_na_lista = item
+        
+        if nome_na_lista == nome_evento_escolhido:
+            ja_participa = True
+            break
+
+    if ja_participa:
         console.print("[bold yellow]Você já está participando deste evento.[/bold yellow]")
         return
 
-    usuario_logado["eventos_participando"].append(evento_escolhido)
+    evento_para_adicionar = {
+        "nome": evento_escolhido_obj["nome"],
+        "data": evento_escolhido_obj["data"]
+    }
 
-    # atualizar no JSON
+    usuario_logado["eventos_participando"].append(evento_para_adicionar)
+
     for u in dados["usuarios"]:
         if u["email"] == usuario_logado["email"]:
             u.update(usuario_logado)
             break
 
     salvar_dados(dados)
-    console.print(f"[bold green]Evento '{evento_escolhido}' adicionado ao seu calendário![/bold green]")
+    console.print(f"[bold green]Evento '{nome_evento_escolhido}' adicionado ao seu calendário![/bold green]")

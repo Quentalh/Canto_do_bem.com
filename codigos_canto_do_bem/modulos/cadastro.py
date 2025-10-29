@@ -6,6 +6,7 @@ if CAMINHO_RAIZ not in sys.path:
 from auxiliares.json_auxiliares import carregar_dados, salvar_dados
 from rich.console import Console
 from rich.panel import Panel
+import requests
 
 console = Console()
 
@@ -24,6 +25,36 @@ def validar_senha(senha):
     tem_minuscula = any(c.islower() for c in senha)
     tem_numero = any(c.isdigit() for c in senha)
     return tem_maiuscula and tem_minuscula and tem_numero
+
+def buscar_cep(cep):
+
+    url = f'https://viacep.com.br/ws/{cep}/json/'
+    
+    try:
+        # Faz a requisição GET para a API
+        response = requests.get(url)
+        # Verifica se a requisição foi bem-sucedida (código de status 200)
+        response.raise_for_status() 
+        
+        # Converte a resposta JSON em um dicionário Python
+        data = response.json()
+        
+        # Verifica se houve erro na consulta da API (ex: CEP não encontrado)
+        if "erro" in data:
+            console.print("CEP não encontrado.")
+            return False
+        return data
+    except requests.exceptions.RequestException as e:
+        console.print(f"Erro ao conectar à API: {e}")
+        return False
+    
+def validar_cep(cep):
+    
+    if len(cep) != 8 or cep.isdigit() == False:
+        return False
+    else:
+        if buscar_cep(cep):
+            return True
 
 
 def cadastrar_usuario():
@@ -60,12 +91,27 @@ def cadastrar_usuario():
             console.print("- Uma letra maiúscula, uma minúscula e um número")
         else:
             break
+    
+    while True:
+        cep = input("CEP (apenas numeros): ").strip()
+        if not validar_cep(cep):
+            console.print("CEP digitado invalido, tente novamente")
+        else:
+            endereco = buscar_cep(cep)
+            cidade = endereco.get('localidade')
+            estado = endereco.get('uf')
+            console.print("[bold green]CEP encontrado com sucesso![/bold green]")
 
+            break
+        
     novo_usuario = {
         "tipo": "usuario",
         "nome": nome,
         "email": email,
         "senha": senha,
+        "cep": cep,
+        "cidade": cidade,
+        "estado": estado,
         "interesses": [],
         "eventos_participando": [] 
     }
@@ -113,6 +159,21 @@ def cadastrar_ong():
             console.print("- Uma letra maiúscula, uma minúscula e um número")
         else:
             break
+    while True:
+        cep = input("CEP (apenas numeros): ").strip()
+        if not validar_cep(cep):
+            console.print("CEP digitado invalido, tente novamente")
+        else:
+            endereco = buscar_cep(cep)
+            logradouro = endereco.get('logradouro')
+            bairro = endereco.get('bairro')
+            cidade = endereco.get('localidade')
+            estado = endereco.get('uf')
+            console.print("[bold green]CEP encontrado com sucesso![/bold green]")
+
+            break
+        
+        
             
     # Pede a descrição (campo específico da ONG)
     descricao = input("Descreva a ONG: ").strip()
@@ -123,6 +184,11 @@ def cadastrar_ong():
         "nome": nome,
         "email": email,
         "senha": senha,
+        "cep": cep,
+        "logradouro": logradouro,
+        "bairro": bairro,
+        "cidade": cidade,
+        "estado": estado,
         "descricao": descricao,
         "eventos_criados": []
     }

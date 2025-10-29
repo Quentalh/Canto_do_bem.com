@@ -35,6 +35,17 @@
                     "data": "30/05/2003"
                 }
             ]
+        },
+        {
+            "tipo": "usuario",
+            "nome": "exemplo6",
+            "email": "exemplo6@.com",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": [],
+            "eventos_participando": []
         }
     ],
     "ongs": [
@@ -47,6 +58,49 @@
             "eventos_criados": [
                 "nome"
             ]
+        },
+        {
+            "tipo": "ong",
+            "nome": "exemplo2",
+            "email": "exemplo2@.com",
+            "senha": "Senha123",
+            "descricao": "imimi[",
+            "eventos_criados": []
+        },
+        {
+            "tipo": "ong",
+            "nome": "exemplo3",
+            "email": "exemplo3@.com",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "descricao": "mdoasmd",
+            "eventos_criados": []
+        },
+        {
+            "tipo": "ong",
+            "nome": "exemplo4",
+            "email": "exemplo4@.com",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "logradouro": null,
+            "bairro": null,
+            "cidade": null,
+            "estado": null,
+            "descricao": "ong",
+            "eventos_criados": []
+        },
+        {
+            "tipo": "ong",
+            "nome": "exemplo5",
+            "email": "exemplo5@.com",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "logradouro": "Rua Le Parc",
+            "bairro": "Imbiribeira",
+            "cidade": "Recife",
+            "estado": "PE",
+            "descricao": "ong",
+            "eventos_criados": []
         }
     ],
     "eventos": [

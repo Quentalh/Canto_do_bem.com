@@ -4,7 +4,7 @@ CAMINHO_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if CAMINHO_RAIZ not in sys.path:
     sys.path.append(CAMINHO_RAIZ)
 
-from auxiliares.json_auxiliares import carregar_dados, salvar_dados
+from auxiliares.json_auxiliares import carregar_dados
 from rich.console import Console
 from rich.panel import Panel
 
@@ -16,7 +16,7 @@ def menu_pesquisa():
     console.print(Panel("Menu de Pesquisa \n\nPor qual tipo de usuário você procura?", style="bold cyan"))
 
     while True:
-        console.print("1- Usuário comum\n2- ONG")
+        console.print("1- Usuário comum\n2- ONG\n3- Sair")
 
         try:
             opcao = int(input("\nEscolha uma opção: ").strip())
@@ -29,7 +29,17 @@ def menu_pesquisa():
                 if usuariop:
                     interesses = usuariop.get("interesses")
                     eventos_p = usuariop.get("eventos_participando")
-                    console.print(f"[bold green]Usuário encontrado![/bold green] \n {nome} \n {email} \n {interesses} \n {eventos_p}")
+                    cidadeuser = usuariop.get("cidade")
+                    estadouser = usuariop.get("estado")
+                    console.print(f"[bold green]Usuário encontrado![/bold green] \nnome: {nome} \nemail: {email} \ncidade: {cidadeuser} \nestado: {estadouser}")
+                    if len(interesses) == 0:
+                        console.print("Usuário não tem nenhum interesse adicionado")
+                    else:
+                        console.print(f"Interesses: ")
+                    if len(eventos_p) == 0:
+                        console.print("Usuário não participa/ou de nenhum evento")
+                    else:
+                        console.print(f"Eventos que o usuário participa/ou: {eventos_p}")
                     tipo ="usuario"
                     eventos_criados = [
                         evento for evento in dados.get("eventos", [])
@@ -51,7 +61,12 @@ def menu_pesquisa():
                 ongp = next((u for u in dados["ongs"] if u["email"] == email and u["nome"] == nome), None)
                 if ongp:
                     desc = ongp.get("descricao")
-                    console.print(f"[bold green]ONG encontrada![/bold green] \n{nome} \n{email} \nDescrição da ONG: {desc}")
+                    cep = ongp.get("cep")
+                    bairro = ongp.get("bairro")
+                    logradouro = ongp.get("logradouro")
+                    cidade = ongp.get("cidade")
+                    estado = ongp.get("estado")
+                    console.print(f"[bold green]ONG encontrada![/bold green] \n{nome} \n{email} \nDescrição da ONG: {desc} \nCEP: {cep} \nLogradouro: {logradouro} \nBairro: {bairro} \nCidade: {cidade} \nEstado: {estado}")
                     tipo = "ong"
                     eventos_criados = [
                         evento for evento in dados.get("eventos", [])
@@ -66,9 +81,6 @@ def menu_pesquisa():
                     return ongp
                 else: 
                     console.print('\n[bold red]Nenhuma ONG encontrada[/bold red]\n')
+            elif opcao == 3:
+                break
         except: console.print("Opção inválida, tente novamente")
-menu_pesquisa()
-
-            
-
-    

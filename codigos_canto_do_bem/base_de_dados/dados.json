@@ -37,7 +37,18 @@
             ]
         }
     ],
-    "ongs": [],
+    "ongs": [
+        {
+            "tipo": "ong",
+            "nome": "exemplo",
+            "email": "exemplo@123.com",
+            "senha": "Senha123",
+            "descricao": "exemplo",
+            "eventos_criados": [
+                "nome"
+            ]
+        }
+    ],
     "eventos": [
         {
             "nome": "evento exemplo",
@@ -62,6 +73,14 @@
             "senha": "abavsg123Q",
             "interesses": [],
             "eventos_participando": []
+        },
+        {
+            "nome": "nome",
+            "descricao": "mimimi",
+            "data": "30/01/2027",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "ong"
         }
     ]
 }

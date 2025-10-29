@@ -84,4 +84,3 @@ def menu_ong(ong_logada):
 
 if __name__ == "__main__":
     menu_principal()
-

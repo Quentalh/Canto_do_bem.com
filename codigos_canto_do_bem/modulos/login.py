@@ -1,3 +1,9 @@
+import os
+import sys
+CAMINHO_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if CAMINHO_RAIZ not in sys.path:
+    sys.path.append(CAMINHO_RAIZ)
+
 from auxiliares.json_auxiliares import carregar_dados
 from rich.console import Console
 from rich.panel import Panel
@@ -23,3 +29,6 @@ def login():
             return usuario
         else:
             console.print("[bold red]E-mail ou senha incorretos! Tente novamente.[/bold red]")
+
+if __name__ == "__main__":
+    login()

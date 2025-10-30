@@ -206,3 +206,15 @@ def menu_pesquisa():
         
         except ValueError:
             console.print("[bold red]Entrada inválida. Por favor, digite um número (1-4).[/bold red]")
+
+    if __name__ == "__main__":
+        opcao = int(input("Qual função vc quer testar? \n1-listar_estados_unicos \n2-pesquisa_local \n3-menu_pesquisa"))
+        try:
+            if opcao == 1:
+                listar_estados_unicos()
+            elif opcao == 2:
+                pesquisa_local()
+            elif opcao == 3:
+                menu_pesquisa()
+        except ValueError:
+            console.print("Opção invalida")

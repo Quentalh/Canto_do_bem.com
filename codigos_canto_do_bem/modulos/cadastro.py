@@ -31,15 +31,12 @@ def buscar_cep(cep):
     url = f'https://viacep.com.br/ws/{cep}/json/'
     
     try:
-        # Faz a requisição GET para a API
         response = requests.get(url)
-        # Verifica se a requisição foi bem-sucedida (código de status 200)
         response.raise_for_status() 
         
         # Converte a resposta JSON em um dicionário Python
         data = response.json()
         
-        # Verifica se houve erro na consulta da API (ex: CEP não encontrado)
         if "erro" in data:
             console.print("CEP não encontrado.")
             return False
@@ -197,3 +194,13 @@ def cadastrar_ong():
     dados["ongs"].append(nova_ong)
     salvar_dados(dados)
     console.print("[bold green]ONG cadastrada com sucesso![/bold green]")
+
+    if __name__ == "__main__":
+        opcao = int(input("Qual função vc quer testar? \n1-cadastro usuário \n2-cadastrar ong"))
+        try:
+            if opcao == "1":
+                cadastrar_usuario()
+            elif opcao == "2":
+                cadastrar_ong()
+        except ValueError:
+            console.print("Opção invalida")

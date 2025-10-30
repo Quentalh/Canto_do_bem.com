@@ -61,15 +61,3 @@ def criar_evento(usuario_logado):
 
     salvar_dados(dados)
     console.print("[bold green]Evento criado com sucesso![/bold green]")
-
-
-# Bloco para testar o ficheiro diretamente
-if __name__ == "__main__":
-    usuario_teste_ong = {
-        "tipo": "ong",
-        "nome": "ONG de Teste",
-        "email": "ongteste@exemplo.com",
-        "eventos_criados": []
-    }
-    console.print("[bold yellow]A iniciar módulo de eventos em modo de teste...[/bold yellow]")
-    criar_evento(usuario_teste_ong)

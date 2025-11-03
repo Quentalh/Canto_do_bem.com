@@ -11,6 +11,28 @@ from rich.panel import Panel
 
 console = Console()
 
+class Usuario_encontrado:
+    def __init__ (self, nome, email, cidade, estado):
+        self.nome = nome
+        self.email = email
+        self.cidade = cidade
+        self.estado = estado
+    def exibir(self):
+        return console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.cidade} - {self.estado}")
+
+class Ong_encontrada:
+    def __init__(self, nome, email, logradouro, bairro, cidade, estado, cep):
+        self.nome = nome
+        self.email = email
+        self.logradouro = logradouro
+        self.bairro = bairro
+        self.cidade = cidade
+        self.estado = estado
+        self.cep = cep
+    def exibir(self):
+        return console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}\nCEP: {self.cep}")
+
+
 
 def listar_estados_unicos():
     dados = carregar_dados()
@@ -111,10 +133,9 @@ def pesquisa_local():
                         escolha = int(input("Digite o número do usuário para ver mais informações: "))
                         if 1 <= escolha <= len(resultados["usuarios"]):
                             usuario_escolhido = resultados["usuarios"][escolha - 1]
-                            cidade = usuario_escolhido.get("cidade")
-                            estado = usuario_escolhido.get("estado")
+                            usuario_exibir = Usuario_encontrado(usuario_escolhido.get("nome"), usuario_escolhido.get("email"), usuario_escolhido.get("cidade"), usuario_escolhido.get("estado"))
                             console.print(f"[bold green]Usuário encontrado![/bold green]")
-                            console.print(f"Nome: {usuario_escolhido['nome']}\nEmail: {usuario_escolhido['email']}\nLocal: {cidade} - {estado}")
+                            usuario_exibir.exibir()
                             return
                         else:
                             console.print("[bold red]Número inválido.[/bold red]")
@@ -130,13 +151,9 @@ def pesquisa_local():
                         escolha = int(input("Digite o número da ONG para ver mais informações: "))
                         if 1 <= escolha <= len(resultados["ongs"]):
                             ong_escolhida = resultados["ongs"][escolha - 1]
-                            cep = ong_escolhida("cep")
-                            logradouro = ong_escolhida.get("logradouro")
-                            bairro = ong_escolhida.get("bairro")
-                            cidade = ong_escolhida.get("cidade")
-                            estado = ong_escolhida.get("estado")
+                            ong_exibir = Ong_encontrada(ong_escolhida.get("nome"), ong_escolhida.get("email"), ong_escolhida.get("logradouro"), ong_escolhida.get("bairro"), ong_escolhida.get("cidade"), ong_escolhida.get("estado"), ong_escolhida.get("cep"))
                             console.print(f"[bold green]ONG encontrada![/bold green]")
-                            console.print(f"Nome: {ong_escolhida['nome']}\nEmail: {ong_escolhida['email']}\nLocal: {logradouro} - {bairro} - {cidade} - {estado}\nCEP: {cep}")
+                            ong_exibir.exibir()
                             return
                         else:
                             console.print("[bold red]Número inválido.[/bold red]")
@@ -170,10 +187,9 @@ def menu_pesquisa():
                 usuariop = next((u for u in dados["usuarios"] if u["email"] == email and u["nome"] == nome), None)
                 
                 if usuariop:
-                    cidade = usuariop.get("cidade")
-                    estado = usuariop.get("estado")
-                    console.print(f"[bold green]Usuário encontrado![/bold green]")
-                    console.print(f"Nome: {usuariop['nome']}\nEmail: {usuariop['email']}\nLocal: {cidade} - {estado}")
+                        usuario_exibir = Usuario_encontrado(usuariop.get("nome"), usuariop.get("email"), usuariop.get("cidade"), usuariop.get("estado"))
+                        console.print(f"[bold green]Usuário encontrado![/bold green]")
+                        usuario_exibir.exibir()
                 else: 
                     console.print('\n[bold red]Nenhum usuário encontrado[/bold red]\n')
 
@@ -185,13 +201,9 @@ def menu_pesquisa():
                 ongp = next((o for o in dados["ongs"] if o["email"] == email and o["nome"] == nome), None)
                 
                 if ongp:
-                    cep = ongp.get("cep")
-                    logradouro = ongp.get("logradouro")
-                    bairro = ongp.get("bairro")
-                    cidade = ongp.get("cidade")
-                    estado = ongp.get("estado")
-                    console.print(f"[bold green]ONG encontrada![/bold green]")
-                    console.print(f"Nome: {ongp['nome']}\nEmail: {ongp['email']}\nLocal: {logradouro} - {bairro} - {cidade} - {estado}\nCEP: {cep}")
+                        ong_exibir = Ong_encontrada(ongp.get("nome"), ongp.get("email"), ongp.get("logradouro"), ongp.get("bairro"), ongp.get("cidade"), ongp.get("estado"), ongp.get("cep"))
+                        console.print(f"[bold green]ONG encontrada![/bold green]")
+                        ong_exibir.exibir()
                 else: 
                     console.print('\n[bold red]Nenhuma ONG encontrada[/bold red]\n')
             

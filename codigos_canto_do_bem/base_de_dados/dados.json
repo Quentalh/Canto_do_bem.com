@@ -46,6 +46,17 @@
             "estado": "PE",
             "interesses": [],
             "eventos_participando": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "diansd",
+            "email": "@.",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": [],
+            "eventos_participando": []
         }
     ],
     "ongs": [

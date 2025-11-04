@@ -110,7 +110,9 @@ def cadastrar_usuario():
         "cidade": cidade,
         "estado": estado,
         "interesses": [],
-        "eventos_participando": [] 
+        "historico_eventos":[],
+        "eventos_criados": [],
+        "Pontos": 0
     }
 
     dados["usuarios"].append(novo_usuario)

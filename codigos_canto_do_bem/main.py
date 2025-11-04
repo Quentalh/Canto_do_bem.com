@@ -8,6 +8,7 @@ from modulos.eventos import criar_evento
 from modulos.perfil import editar_perfil
 from modulos.calendario import ver_calendario, adicionar_evento_calendario
 from modulos.pesquisa import menu_pesquisa
+from modulos.sistema_de_pontos import checkar_presenca
 
 console = Console()
 
@@ -48,7 +49,8 @@ def menu_usuario(usuario_logado):
         console.print("3 - Adicionar Evento ao Calendário")
         console.print("4 - Criar Evento (como voluntário)")
         console.print('5 - Pesquisar por um usuário/ONG')
-        console.print("6 - Sair")
+        console.print("6 - Checagem de presença")
+        console.print("7 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
 
@@ -62,7 +64,9 @@ def menu_usuario(usuario_logado):
             criar_evento(usuario_logado)
         elif opcao == "5":
             menu_pesquisa()
-        elif opcao == '6':
+        elif opcao == "6":
+            checkar_presenca(usuario_logado)
+        elif opcao == '7':
             console.print('Sair')
             break
         else:

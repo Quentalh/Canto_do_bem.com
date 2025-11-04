@@ -3,148 +3,80 @@
         {
             "tipo": "usuario",
             "nome": "Heitor",
-            "email": "heitorquental321@gmail.com",
-            "senha": "Patbit09",
-            "interesses": [],
-            "eventos_participando": [
+            "email": "heitor@email.com",
+            "senha": "Senha123",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": ["meio ambiente", "educação"],
+            "historico_eventos": [
                 {
-                    "nome": "evento 2",
-                    "data": "01/01/2026"
-                },
-                {
-                    "nome": "evento sopão",
-                    "data": "06/09/2026"
+                    "nome": "Mutirão de Limpeza",
+                    "data": "01/01/2024"
                 }
-            ]
-        },
-        {
-            "tipo": "usuario",
-            "nome": "lopes",
-            "email": "exemplo@gmail.com",
-            "senha": "Senhaexemplo1.com",
-            "interesses": [
-                "mimim"
             ],
-            "eventos_participando": [
+            "eventos_criados": [
                 {
-                    "nome": "evento exemplo",
-                    "data": "21/10/2025"
-                },
-                {
-                    "nome": "ex3",
-                    "data": "30/05/2003"
+                    "nome": "Ação Solidária",
+                    "descricao": "Distribuição de alimentos",
+                    "inicio": "09:00:00",
+                    "fim": "12:00:00",
+                    "horas_total": 3.0,
+                    "data": "10/10/2024",
+                    "cidade": "Recife",
+                    "criado_por": "Heitor",
+                    "tipo_criador": "usuario"
                 }
-            ]
-        },
-        {
-            "tipo": "usuario",
-            "nome": "exemplo6",
-            "email": "exemplo6@.com",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "cidade": "Recife",
-            "estado": "PE",
-            "interesses": [],
-            "eventos_participando": []
-        },
-        {
-            "tipo": "usuario",
-            "nome": "diansd",
-            "email": "@.",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "cidade": "Recife",
-            "estado": "PE",
-            "interesses": [],
-            "eventos_participando": []
+            ],
+            "Pontos": 10
         }
     ],
     "ongs": [
         {
             "tipo": "ong",
-            "nome": "exemplo",
-            "email": "exemplo@123.com",
-            "senha": "Senha123",
-            "descricao": "exemplo",
-            "eventos_criados": [
-                "nome"
-            ]
-        },
-        {
-            "tipo": "ong",
-            "nome": "exemplo2",
-            "email": "exemplo2@.com",
-            "senha": "Senha123",
-            "descricao": "imimi[",
-            "eventos_criados": []
-        },
-        {
-            "tipo": "ong",
-            "nome": "exemplo3",
-            "email": "exemplo3@.com",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "descricao": "mdoasmd",
-            "eventos_criados": []
-        },
-        {
-            "tipo": "ong",
-            "nome": "exemplo4",
-            "email": "exemplo4@.com",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "logradouro": null,
-            "bairro": null,
-            "cidade": null,
-            "estado": null,
-            "descricao": "ong",
-            "eventos_criados": []
-        },
-        {
-            "tipo": "ong",
-            "nome": "exemplo5",
-            "email": "exemplo5@.com",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "logradouro": "Rua Le Parc",
-            "bairro": "Imbiribeira",
-            "cidade": "Recife",
+            "nome": "ONG Esperança",
+            "email": "contato@ongesperanca.org",
+            "senha": "Ong12345",
+            "cep": "50000000",
+            "cidade": "Olinda",
             "estado": "PE",
-            "descricao": "ong",
-            "eventos_criados": []
+            "interesses": ["assistência social", "educação"],
+            "eventos_criados": [
+                {
+                    "nome": "Campanha do Agasalho",
+                    "descricao": "Arrecadação de roupas para o inverno",
+                    "inicio": "08:00:00",
+                    "fim": "17:00:00",
+                    "horas_total": 9.0,
+                    "data": "15/06/2024",
+                    "cidade": "Olinda",
+                    "criado_por": "ONG Esperança",
+                    "tipo_criador": "ong"
+                }
+            ]
         }
     ],
     "eventos": [
         {
-            "nome": "evento exemplo",
-            "descricao": "exemplo",
-            "data": "21/10/2025",
+            "nome": "Mutirão de Limpeza",
+            "descricao": "Limpeza da praia de Boa Viagem",
+            "inicio": "07:00:00",
+            "fim": "11:00:00",
+            "horas_total": 4.0,
+            "data": "01/01/2024",
             "cidade": "Recife",
-            "criado_por": "exemplo",
+            "criado_por": "Heitor",
             "tipo_criador": "usuario"
         },
         {
-            "nome": "evento 2",
-            "descricao": "exemplo",
-            "data": "01/01/2026",
-            "cidade": "Recife",
-            "criado_por": "cantodobem",
-            "tipo_criador": "ong"
-        },
-        {
-            "tipo": "usuario",
-            "nome": "josé",
-            "email": "jose@gmail.com",
-            "senha": "abavsg123Q",
-            "interesses": [],
-            "eventos_participando": []
-        },
-        {
-            "nome": "nome",
-            "descricao": "mimimi",
-            "data": "30/01/2027",
-            "cidade": "Recife",
-            "criado_por": "exemplo",
+            "nome": "Campanha do Agasalho",
+            "descricao": "Arrecadação de roupas para o inverno",
+            "inicio": "08:00:00",
+            "fim": "17:00:00",
+            "horas_total": 9.0,
+            "data": "15/06/2024",
+            "cidade": "Olinda",
+            "criado_por": "ONG Esperança",
             "tipo_criador": "ong"
         }
     ]

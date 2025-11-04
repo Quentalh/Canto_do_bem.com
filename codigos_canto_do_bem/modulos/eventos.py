@@ -35,13 +35,36 @@ def criar_evento(usuario_logado):
         except ValueError:
 
             console.print("[bold red]Formato de data inválido! Use dd/mm/aaaa.[/bold red]")
+    while True:
+        try:
+            hora_inicio = datetime.strptime(input("Digite o horário em que o evento inicia"), "%H:%M").time()
 
+            hora_fim = datetime.strptime(input("Digite o horário em que o evento encerra"), "%H:%M").time()
+
+            if hora_inicio == hora_fim:
+                console.print("Você repetiu o mesmo hórario para o inicio e fim do evento!\nTente novamente")
+            else:
+                dt_inicio = datetime.combine(date.today(), hora_inicio)
+                dt_fim = datetime.combine(date.today(), hora_fim)
+                
+                duracao = dt_fim - dt_inicio
+                total_segundos = duracao.total_seconds()
+                horas_total = total_segundos / 3600
+
+                break
+            
+
+        except ValueError:
+            console.print("Formato de horário inválido. Digite um horário dentro de 24 horas no formato h:m")
 
     cidade = input("Cidade: ").strip()
 
     evento = {
         "nome": nome,
         "descricao": descricao,
+        "inicio": hora_inicio.isoformat(),
+        "fim": hora_fim.isoformat(),
+        "horas_total": horas_total,
         "data": data_input,
         "cidade": cidade,
         "criado_por": usuario_logado["nome"],
@@ -50,13 +73,20 @@ def criar_evento(usuario_logado):
 
     dados["eventos"].append(evento)
 
+    if usuario_logado["tipo"] == "usuario":
+        for usuario in dados["usuarios"]:
+            if usuario["email"] == usuario_logado["email"]:
+                if "eventos_criados" not in usuario:
+                    usuario["eventos_criados"] = []
+                usuario["eventos_criados"].append(evento)
+
     if usuario_logado["tipo"] == "ong":
         for ong in dados["ongs"]:
             if ong["email"] == usuario_logado["email"]:
                 # Garante que a lista 'eventos_criados' existe
                 if "eventos_criados" not in ong:
                     ong["eventos_criados"] = []
-                ong["eventos_criados"].append(nome)
+                ong["eventos_criados"].append(evento)
                 break
 
     salvar_dados(dados)

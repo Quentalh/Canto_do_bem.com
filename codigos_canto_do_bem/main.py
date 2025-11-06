@@ -8,7 +8,7 @@ from modulos.eventos import criar_evento
 from modulos.perfil import editar_perfil
 from modulos.calendario import ver_calendario, adicionar_evento_calendario
 from modulos.pesquisa import menu_pesquisa
-from modulos.sistema_de_pontos import checkar_presenca
+from modulos.sistema_de_pontos import checkar_presenca,loja_de_pontos
 
 console = Console()
 
@@ -66,7 +66,9 @@ def menu_usuario(usuario_logado):
             menu_pesquisa()
         elif opcao == "6":
             checkar_presenca(usuario_logado)
-        elif opcao == '7':
+        elif opcao == "7":
+            loja_de_pontos(usuario_logado)
+        elif opcao == '8':
             console.print('Sair')
             break
         else:

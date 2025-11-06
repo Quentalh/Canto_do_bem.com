@@ -14,6 +14,21 @@ console = Console()
 
 hoje = date.today()
 
+class Prod:
+    def __init__(self,nome,valor):
+        self.nome = nome
+        self.valor = valor
+
+def criar_dic(**produto):
+    lista = {}
+    i = 1
+    for chave,valor in produto.items():
+        x = Prod(chave,valor)
+        lista[f"{i}"] = x
+        i = i + 1
+    return lista
+        
+
 def checkar_presenca(usuario_logado):   
     while True:
         eventos_passados = []
@@ -45,9 +60,7 @@ def checkar_presenca(usuario_logado):
         for idx, eventop in enumerate(eventos_passados, 2):
             console.print(f"{idx}. {eventop['nome']}- {eventop['data']}")
         
-        tamanho = len(eventos_passados)
-        if len(eventos_passados) == 1:
-            tamanho = len(eventos_passados) + 1 
+        tamanho = len(eventos_passados) + 1
         
         try:
             opcao = int(input("Digite o numero correspondente a um dos eventos. Ou saia pressionando 1: "))
@@ -112,3 +125,133 @@ def checkar_presenca(usuario_logado):
             else: console.print("Opção inválida, digite novamente")
 
         except ValueError: console.print("Apenas digitos são aceitos, tente novamente")
+
+
+def loja_de_pontos(usuario_logado):
+    while True:
+        console.print(Panel(f"Loja de pontos 💰 \nSeu número atual dee pontos: {usuario_logado.get('Pontos',0)}\n *Todos os itens oferecidos por empresas parceiras", style = "bold cyan"))
+        console.print("1 - Nossos produtos\n2 - Cupons de Descontoz\n3 - Ingressos\n4 - Produtos de nosso parceiros\n5 - Sair")
+        try: 
+            opcao = int(input("\nEscolha uma opção: "))
+
+            if opcao == 1: 
+                lista_de_produtos(usuario_logado)
+            elif opcao == 2:
+                lista_de_cupons(usuario_logado)
+            elif opcao == 3:
+                lista_de_ingressos(usuario_logado)
+            elif opcao == 4:
+                lista_de_produtos_parceiros(usuario_logado)
+            elif opcao == 5:
+                return
+            else: 
+                console.print("Opção inválida")
+
+        except ValueError: console.print("Opção invalida, lembre-se: apenas digitos são aceitos e apenas as opções dee 1 a 5 são aceitas")      
+
+def lista_de_produtos(usuario_logado):
+    dados = carregar_dados()
+    produtos = criar_dic(Ecopen = 10, Ecobag = 15, Camisa = 17, Caneca = 12, Garrafa = 15)
+    for idx,produto in enumerate(produtos,1):
+        console.print(f"{idx}. {produtos[f'{produto}'].nome} do bem $ {produtos[f'{produto}'].nome}")
+    while True:
+        try: 
+            opcao = int(input("\nEscolha uma opcão: "))
+            if not (1 <= opcao <= len(produtos)):
+                console.print("Opção inválida, tente novamente")
+            produto_escolhido = produtos[f"{opcao}"]
+            while True:
+                qnt = int(input("Quantidade: "))
+                custo = produto_escolhido.valor * qnt
+                if usuario_logado.get("Pontos",0) >= custo:
+                    valor_novo = usuario_logado.get('Pontos',0) - custo
+                    usuario_logado['Pontos'] = valor_novo
+                    usuario_logado['historico_de_compras'].append(f"{qnt}x {produto_escolhido.nome}, custo = {custo}")
+                    console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    salvar_dados(dados)
+                    return
+                else:
+                    console.print("Você não tem pontos suficientes para realizar essa transação.")
+                    break
+        except ValueError: console.print("Valor inválido (digite um numero)")
+  
+    
+def lista_de_cupons(usuario_logado):
+    dados = carregar_dados()
+    cupons = criar_dic(Café = 20, Almoço =35 , Livraria = 40,  Mercado = 30, Workshop = 35)
+    for idx,produto in enumerate(cupons,1):
+        console.print(f"{idx}. Cupom {cupons[f'{produto}'].nome} $ {cupons[f'{produto}'].nome}")
+
+    while True:
+        try: 
+            opcao = int(input("\nEscolha uma opcão: "))
+            if not (1 <= opcao <= len(cupons)):
+                console.print("Opção inválida, tente novamente")
+            cupom_escolhido = cupons[f"{opcao}"]
+            while True:
+                qnt = int(input("Quantidade: "))
+                custo = cupom_escolhido.valor * qnt
+                if usuario_logado.get("Pontos",0) >= custo:
+                    valor_novo = usuario_logado.get('Pontos',0) - custo
+                    usuario_logado['Pontos'] = valor_novo
+                    usuario_logado['historico_de_compras'].append(f"{qnt}x {cupom_escolhido.nome}, custo = {custo}")
+                    console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    salvar_dados(dados)
+                    return
+                else:
+                    console.print("Você não tem pontos suficientes para realizar essa transação.")
+                    break
+        except ValueError: console.print("Valor inválido (digite um numero)")
+
+def lista_de_ingressos(usuario_logado):
+    dados = carregar_dados()
+    ingressos = criar_dic(Teatro = 40, Cinema = 40 , Museu = 30 ,  Parque = 35, Show = 45, Palestra = 25)
+    for idx,produto in enumerate(ingressos,1):
+        console.print(f"{idx}. Ingresso {ingressos[f'{produto}'].nome}  $ {ingressos['produto'].nome}")
+    while True:
+        try: 
+            opcao = int(input("\nEscolha uma opcão: "))
+            if not (1 <= opcao <= len(ingressos)):
+                console.print("Opção inválida, tente novamente")
+            ingresso_escolhido = ingressos[f"{opcao}"]
+            while True:
+                qnt = int(input("Quantidade: "))
+                custo = ingresso_escolhido.valor * qnt
+                if usuario_logado.get("Pontos",0) >= custo:
+                    valor_novo = usuario_logado.get('Pontos',0) - custo
+                    usuario_logado['Pontos'] = valor_novo
+                    usuario_logado['historico_de_compras'].append(f"{qnt}x {ingresso_escolhido.nome}, custo = {custo}")
+                    console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    salvar_dados(dados)
+                    return
+                else:
+                    console.print("Você não tem pontos suficientes para realizar essa transação.")
+                    break
+        except ValueError: console.print("Valor inválido (digite um numero)")
+
+
+def lista_de_produtos_parceiros(usuario_logado):
+    dados = carregar_dados()
+    produtos_par = criar_dic(Livro = 20, Comida = 25 , Manicure = 40 ,  Sobremesa = 30, Arte = 45, Powerbank = 30)
+    for idx,produto in enumerate(produtos_par,1):
+        console.print(f"{idx}. {produtos_par[f'{produto}'].nome} do bem $ {produtos_par[f'{produto}'].nome}")
+    while True:
+        try: 
+            opcao = int(input("\nEscolha uma opcão: "))
+            if not (1 <= opcao <= len(produtos_par)):
+                console.print("Opção inválida, tente novamente")
+            produto_par_escolhido = produtos_par[f"{opcao}"]
+            while True:
+                qnt = int(input("Quantidade: "))
+                custo = produto_par_escolhido.valor * qnt
+                if usuario_logado.get("Pontos",0) >= custo:
+                    valor_novo = usuario_logado.get('Pontos',0) - custo
+                    usuario_logado['Pontos'] = valor_novo
+                    usuario_logado['historico_de_compras'].append(f"{qnt}x {produto_par_escolhido.nome}, custo = {custo}")
+                    console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    salvar_dados(dados)
+                    return
+                else:
+                    console.print("Você não tem pontos suficientes para realizar essa transação.")
+                    break
+        except ValueError: console.print("Valor inválido (digite um numero)")

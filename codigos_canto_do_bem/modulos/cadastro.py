@@ -112,6 +112,7 @@ def cadastrar_usuario():
         "interesses": [],
         "historico_eventos":[],
         "eventos_criados": [],
+        "historico_de_compras": [],
         "Pontos": 0
     }
 

@@ -153,10 +153,13 @@ def lista_de_produtos(usuario_logado):
     dados = carregar_dados()
     produtos = criar_dic(Ecopen = 10, Ecobag = 15, Camisa = 17, Caneca = 12, Garrafa = 15)
     for idx,produto in enumerate(produtos,1):
-        console.print(f"{idx}. {produtos[f'{produto}'].nome} do bem $ {produtos[f'{produto}'].nome}")
+        console.print(f"{idx}. {produtos[f'{produto}'].nome} do bem $ {produtos[f'{produto}'].valor}")
+    console.print(f"{idx + 1}. Sair")
     while True:
         try: 
             opcao = int(input("\nEscolha uma opcão: "))
+            if opcao == idx + 1:
+                return
             if not (1 <= opcao <= len(produtos)):
                 console.print("Opção inválida, tente novamente")
             produto_escolhido = produtos[f"{opcao}"]
@@ -168,6 +171,10 @@ def lista_de_produtos(usuario_logado):
                     usuario_logado['Pontos'] = valor_novo
                     usuario_logado['historico_de_compras'].append(f"{qnt}x {produto_escolhido.nome}, custo = {custo}")
                     console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    for u in dados["usuarios"]:
+                        if u["email"] == usuario_logado["email"]:
+                            u.update(usuario_logado)
+                            break
                     salvar_dados(dados)
                     return
                 else:
@@ -180,11 +187,13 @@ def lista_de_cupons(usuario_logado):
     dados = carregar_dados()
     cupons = criar_dic(Café = 20, Almoço =35 , Livraria = 40,  Mercado = 30, Workshop = 35)
     for idx,produto in enumerate(cupons,1):
-        console.print(f"{idx}. Cupom {cupons[f'{produto}'].nome} $ {cupons[f'{produto}'].nome}")
-
+        console.print(f"{idx}. Cupom {cupons[f'{produto}'].nome} $ {cupons[f'{produto}'].valor}")
+    console.print(f"{idx + 1}. Sair")
     while True:
         try: 
             opcao = int(input("\nEscolha uma opcão: "))
+            if opcao == idx + 1:
+                return
             if not (1 <= opcao <= len(cupons)):
                 console.print("Opção inválida, tente novamente")
             cupom_escolhido = cupons[f"{opcao}"]
@@ -196,6 +205,10 @@ def lista_de_cupons(usuario_logado):
                     usuario_logado['Pontos'] = valor_novo
                     usuario_logado['historico_de_compras'].append(f"{qnt}x {cupom_escolhido.nome}, custo = {custo}")
                     console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    for u in dados["usuarios"]:
+                        if u["email"] == usuario_logado["email"]:
+                            u.update(usuario_logado)
+                            break
                     salvar_dados(dados)
                     return
                 else:
@@ -207,10 +220,13 @@ def lista_de_ingressos(usuario_logado):
     dados = carregar_dados()
     ingressos = criar_dic(Teatro = 40, Cinema = 40 , Museu = 30 ,  Parque = 35, Show = 45, Palestra = 25)
     for idx,produto in enumerate(ingressos,1):
-        console.print(f"{idx}. Ingresso {ingressos[f'{produto}'].nome}  $ {ingressos['produto'].nome}")
+        console.print(f"{idx}. Ingresso {ingressos[f'{produto}'].nome}  $ {ingressos[f'{produto}'].valor}")
+    console.print(f"{idx + 1}. Sair")
     while True:
         try: 
             opcao = int(input("\nEscolha uma opcão: "))
+            if opcao == idx + 1:
+                return
             if not (1 <= opcao <= len(ingressos)):
                 console.print("Opção inválida, tente novamente")
             ingresso_escolhido = ingressos[f"{opcao}"]
@@ -222,6 +238,10 @@ def lista_de_ingressos(usuario_logado):
                     usuario_logado['Pontos'] = valor_novo
                     usuario_logado['historico_de_compras'].append(f"{qnt}x {ingresso_escolhido.nome}, custo = {custo}")
                     console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    for u in dados["usuarios"]:
+                        if u["email"] == usuario_logado["email"]:
+                            u.update(usuario_logado)
+                            break
                     salvar_dados(dados)
                     return
                 else:
@@ -234,10 +254,13 @@ def lista_de_produtos_parceiros(usuario_logado):
     dados = carregar_dados()
     produtos_par = criar_dic(Livro = 20, Comida = 25 , Manicure = 40 ,  Sobremesa = 30, Arte = 45, Powerbank = 30)
     for idx,produto in enumerate(produtos_par,1):
-        console.print(f"{idx}. {produtos_par[f'{produto}'].nome} do bem $ {produtos_par[f'{produto}'].nome}")
+        console.print(f"{idx}. {produtos_par[f'{produto}'].nome} do bem $ {produtos_par[f'{produto}'].valor}")
+    console.print(f"{idx + 1}. Sair")
     while True:
         try: 
             opcao = int(input("\nEscolha uma opcão: "))
+            if opcao == idx + 1:
+                return
             if not (1 <= opcao <= len(produtos_par)):
                 console.print("Opção inválida, tente novamente")
             produto_par_escolhido = produtos_par[f"{opcao}"]
@@ -249,6 +272,10 @@ def lista_de_produtos_parceiros(usuario_logado):
                     usuario_logado['Pontos'] = valor_novo
                     usuario_logado['historico_de_compras'].append(f"{qnt}x {produto_par_escolhido.nome}, custo = {custo}")
                     console.print("[bold green] Compra realizada com sucesso! [/bold green]")
+                    for u in dados["usuarios"]:
+                        if u["email"] == usuario_logado["email"]:
+                            u.update(usuario_logado)
+                            break
                     salvar_dados(dados)
                     return
                 else:

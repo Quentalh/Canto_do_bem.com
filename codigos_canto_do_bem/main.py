@@ -50,7 +50,8 @@ def menu_usuario(usuario_logado):
         console.print("4 - Criar Evento (como voluntário)")
         console.print('5 - Pesquisar por um usuário/ONG')
         console.print("6 - Checagem de presença")
-        console.print("7 - Sair")
+        console.print("7 - Loja de pontos")
+        console.print("8 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
 
@@ -63,7 +64,7 @@ def menu_usuario(usuario_logado):
         elif opcao == "4":
             criar_evento(usuario_logado)
         elif opcao == "5":
-            menu_pesquisa()
+            menu_pesquisa(usuario_logado)
         elif opcao == "6":
             checkar_presenca(usuario_logado)
         elif opcao == "7":

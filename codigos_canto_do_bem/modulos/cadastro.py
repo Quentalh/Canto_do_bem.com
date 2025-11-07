@@ -61,9 +61,12 @@ def cadastrar_usuario():
     # valida nome (não pode repetir)
     while True:
         nome = input("Nome: ").strip()
-        if any(u["nome"].lower() == nome.lower() for u in dados["usuarios"]):
-            console.print("[bold red]Já existe um usuário com esse nome.[/bold red]")
-        elif nome == "":
+        try:
+            if any(u["nome"].lower() == nome.lower() for u in dados["usuarios"]):
+                console.print("[bold red]Já existe um usuário com esse nome.[/bold red]")
+        except KeyError: 
+            pass
+        if nome == "":
             console.print("[bold red]O nome não pode ser vazio.[/bold red]")
         else:
             break
@@ -73,8 +76,11 @@ def cadastrar_usuario():
         email = input("E-mail: ").strip()
         if not validar_email(email):
             console.print("[bold red]E-mail inválido! Deve conter '@' e um formato válido.[/bold red]")
-        elif any(u["email"] == email for u in dados["usuarios"]):
-            console.print("[bold red]E-mail já cadastrado.[/bold red]")
+        try:
+            if any(u["email"] == email for u in dados["usuarios"]):
+                console.print("[bold red]E-mail já cadastrado.[/bold red]")
+        except KeyError:
+            break      
         else:
             break
 
@@ -190,6 +196,7 @@ def cadastrar_ong():
         "cidade": cidade,
         "estado": estado,
         "descricao": descricao,
+        "doacoes_recebidas": 0,
         "eventos_criados": []
     }
 

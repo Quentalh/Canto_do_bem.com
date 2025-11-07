@@ -5,7 +5,7 @@ CAMINHO_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if CAMINHO_RAIZ not in sys.path:
     sys.path.append(CAMINHO_RAIZ)
 
-from auxiliares.json_auxiliares import carregar_dados
+from auxiliares.json_auxiliares import carregar_dados,salvar_dados
 from rich.console import Console
 from rich.panel import Panel
 
@@ -18,7 +18,8 @@ class Usuario_encontrado:
         self.cidade = cidade
         self.estado = estado
     def exibir(self):
-        return console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.cidade} - {self.estado}")
+        console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.cidade} - {self.estado}")
+        input("\nPressione ENTER para voltar...")
 
 class Ong_encontrada:
     def __init__(self, nome, email, logradouro, bairro, cidade, estado, cep):
@@ -29,8 +30,29 @@ class Ong_encontrada:
         self.cidade = cidade
         self.estado = estado
         self.cep = cep
+        self.doacoes = 0
     def exibir(self):
-        return console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}\nCEP: {self.cep}")
+        console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}\nCEP: {self.cep}")
+        input("\nPressione ENTER para voltar...")
+    def doar(self,usuario_logado):
+        console.print(f"Seus Pontos: {usuario_logado['Pontos']}")
+        console.print("[bold yellow]Lembrete: 1 Ponto = R$ 0,50 [/bold yellow]")
+        while True:
+            try:    
+                qnt = int(input(f"Quantos pontos você deseja doar para {self.nome}?\n(Digite uma letra para voltar)"))
+                if usuario_logado['Pontos'] >= qnt:
+                    usuario_logado['Pontos'] = usuario_logado['Pontos'] - qnt
+                    doacao = qnt / 2
+                    self.doacoes = doacao
+                    return console.print(f"[bold green]Parabéns! você doou {qnt} pontos para {self.nome}[/bold green]")
+                else:
+                    console.print("Você não tem pontos suficientes para efetuar essa doação, tente novamente com uma quantidade menor.")
+                    continue
+            except ValueError:
+                return
+
+            
+    
 
 
 
@@ -75,7 +97,8 @@ def listar_entidades_por_local(estado, cidade):
     return entidades_encontradas
 
 
-def pesquisa_local():
+def pesquisa_local(usuario_logado):
+    dados = carregar_dados()
     console.print(Panel("Pesquisa por Localização", style="bold cyan"))
 
     estados_disponiveis = listar_estados_unicos()
@@ -153,8 +176,25 @@ def pesquisa_local():
                             ong_escolhida = resultados["ongs"][escolha - 1]
                             ong_exibir = Ong_encontrada(ong_escolhida.get("nome"), ong_escolhida.get("email"), ong_escolhida.get("logradouro"), ong_escolhida.get("bairro"), ong_escolhida.get("cidade"), ong_escolhida.get("estado"), ong_escolhida.get("cep"))
                             console.print(f"[bold green]ONG encontrada![/bold green]")
-                            ong_exibir.exibir()
-                            return
+                            console.print("Oque você deseja fazer?\n\n1 - Exibir detalhes da ONG\n2 - Doar para a ONG\n3 - Sair")
+                            while True:
+                                try:
+                                    acao = int(input("Escolha uma opção: "))
+                                    if acao == 1:
+                                        ong_exibir.exibir()
+                                    elif acao == 2:
+                                        ong_exibir.doar(usuario_logado)
+                                        ong_escolhida['doacoes_recebidas'] = ong_exibir.doacoes
+                                        for u in dados["usuarios"]:
+                                            if u["email"] == usuario_logado["email"]:
+                                                u.update(usuario_logado)
+                                                break
+                                        salvar_dados(dados)
+                                        return
+                                    elif acao == 3:
+                                        return
+                                except ValueError:
+                                    console.print("Opção inválida, tente novamente.")                            
                         else:
                             console.print("[bold red]Número inválido.[/bold red]")
                     except ValueError:
@@ -166,7 +206,7 @@ def pesquisa_local():
                 console.print("Opção inválida")
             break
 
-def menu_pesquisa():
+def menu_pesquisa(usuario_logado):
     dados = carregar_dados() 
 
     while True:
@@ -203,12 +243,30 @@ def menu_pesquisa():
                 if ongp:
                         ong_exibir = Ong_encontrada(ongp.get("nome"), ongp.get("email"), ongp.get("logradouro"), ongp.get("bairro"), ongp.get("cidade"), ongp.get("estado"), ongp.get("cep"))
                         console.print(f"[bold green]ONG encontrada![/bold green]")
-                        ong_exibir.exibir()
+                        console.print("Oque você deseja fazer?\n\n1 - Exibir detalhes da ONG\n2 - Doar para a ONG\n3 - Sair")
+                        while True:
+                            try:
+                                acao = int(input("Escolha uma opção: "))
+                                if acao == 1:
+                                    ong_exibir.exibir()
+                                elif acao == 2:
+                                    ong_exibir.doar(usuario_logado)
+                                    ongp['doacoes_recebidas'] = ong_exibir.doacoes
+                                    for u in dados["usuarios"]:
+                                        if u["email"] == usuario_logado["email"]:
+                                            u.update(usuario_logado)
+                                            break
+                                    salvar_dados(dados)
+                                elif acao == 3:
+                                    return
+                            except ValueError:
+                                console.print("Opção inválida, tente novamente.")
+
                 else: 
                     console.print('\n[bold red]Nenhuma ONG encontrada[/bold red]\n')
             
             elif opcao == 3:
-                pesquisa_local()
+                pesquisa_local(usuario_logado)
             
             elif opcao == 4:
                 break

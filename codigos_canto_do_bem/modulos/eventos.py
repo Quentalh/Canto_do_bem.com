@@ -37,9 +37,9 @@ def criar_evento(usuario_logado):
             console.print("[bold red]Formato de data inválido! Use dd/mm/aaaa.[/bold red]")
     while True:
         try:
-            hora_inicio = datetime.strptime(input("Digite o horário em que o evento inicia"), "%H:%M").time()
+            hora_inicio = datetime.strptime(input("Digite o horário em que o evento inicia (Ex: 13:00): "), "%H:%M").time()
 
-            hora_fim = datetime.strptime(input("Digite o horário em que o evento encerra"), "%H:%M").time()
+            hora_fim = datetime.strptime(input("Digite o horário em que o evento encerra (Ex: 18:00): "), "%H:%M").time()
 
             if hora_inicio == hora_fim:
                 console.print("Você repetiu o mesmo hórario para o inicio e fim do evento!\nTente novamente")

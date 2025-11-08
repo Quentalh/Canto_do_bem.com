@@ -107,12 +107,28 @@ def checkar_presenca(usuario_logado):
                             pontos_ganhos = evento_escolhido.get('horas_total')
                                 
                             entregador['Pontos'] += pontos_ganhos
+
+                            entregador['Horas_de_servico'] += pontos_ganhos
                             
                             console.print(f"[bold green]Presença confirmada! {entregador['nome']} ganhou {pontos_ganhos} pontos![/bold green]")
                             
                             usuarios_presenca.pop(escolha - 1)
-                            
-                            salvar_dados(dados) 
+
+                            for u in dados["usuarios"]:
+                                if u["email"] == entregador["email"]:
+                                    u.update(entregador)
+
+                            if usuario_logado["tipo"] == "usuario":
+                                for i in dados["usuarios"]:
+                                    if i["email"] == usuario_logado["email"]:
+                                        i.update(usuario_logado)
+                                        
+                            if usuario_logado["tipo"] == "ong":
+                                for o in dados["ongs"]:
+                                    if o["email"] == usuario_logado["email"]:
+                                        o.update(usuario_logado)
+
+                            salvar_dados(dados)
                             
                             if not usuarios_presenca:
                                 console.print("[bold blue]Todos os participantes receberam pontos.[/bold blue]")

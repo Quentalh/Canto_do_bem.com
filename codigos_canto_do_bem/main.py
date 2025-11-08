@@ -80,13 +80,16 @@ def menu_ong(ong_logada):
     while True:
         console.print(Panel(f"🏢 Menu da ONG - {ong_logada['nome']}", style="bold cyan"))
         console.print("1 - Criar Evento/Voluntariado")
-        console.print("2 - Sair")
+        console.print("2 - Checagem de presença")
+        console.print("3 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
 
         if opcao == "1":
             criar_evento(ong_logada)
         elif opcao == "2":
+            checkar_presenca(ong_logada)
+        elif opcao == "3":
             console.print("[bold yellow]Voltando ao menu principal...[/bold yellow]")
             break
         else:

@@ -10,9 +10,21 @@
             "estado": "PE",
             "interesses": [],
             "historico_eventos": [],
-            "eventos_criados": [],
+            "eventos_criados": [
+                {
+                    "nome": "exemploevento",
+                    "descricao": "mimimi",
+                    "inicio": "12:00:00",
+                    "fim": "18:00:00",
+                    "horas_total": 6.0,
+                    "data": "20/10/2025",
+                    "cidade": "Recife",
+                    "criado_por": "exemplo",
+                    "tipo_criador": "usuario"
+                }
+            ],
             "historico_de_compras": [],
-            "Pontos": 0
+            "Pontos": 25
         }
     ],
     "ongs": [
@@ -27,9 +39,21 @@
             "cidade": "Recife",
             "estado": "PE",
             "descricao": "exemplo",
-            "doacoes_recebidas": 0,
+            "doacoes_recebidas": 12.5,
             "eventos_criados": []
         }
     ],
-    "eventos": []
+    "eventos": [
+        {
+            "nome": "exemploevento",
+            "descricao": "mimimi",
+            "inicio": "12:00:00",
+            "fim": "18:00:00",
+            "horas_total": 6.0,
+            "data": "20/11/2025",
+            "cidade": "Recife",
+            "criado_por": "exemplo",
+            "tipo_criador": "usuario"
+        }
+    ]
 }

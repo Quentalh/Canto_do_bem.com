@@ -188,7 +188,9 @@ def pesquisa_local(usuario_logado):
                                         for u in dados["usuarios"]:
                                             if u["email"] == usuario_logado["email"]:
                                                 u.update(usuario_logado)
-                                                break
+                                        for i in dados ["ongs"]:
+                                            if i["email"] == ong_escolhida['email']:
+                                                i.update(ong_escolhida)
                                         salvar_dados(dados)
                                         return
                                     elif acao == 3:

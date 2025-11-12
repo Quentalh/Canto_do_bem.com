@@ -41,8 +41,10 @@ def criar_evento(usuario_logado):
 
             hora_fim = datetime.strptime(input("Digite o horário em que o evento encerra (Ex: 18:00): "), "%H:%M").time()
 
-            if hora_inicio == hora_fim:
+            if hora_inicio == hora_fim :
                 console.print("Você repetiu o mesmo hórario para o inicio e fim do evento!\nTente novamente")
+            elif hora_inicio >= hora_fim:
+                console.print("Você digitou um hórario de encerramento do evento que ocorrre antes do inicio do evento \n Tente novamente")
             else:
                 dt_inicio = datetime.combine(date.today(), hora_inicio)
                 dt_fim = datetime.combine(date.today(), hora_fim)

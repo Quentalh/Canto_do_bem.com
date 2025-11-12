@@ -19,7 +19,7 @@ class Rank:
         self.nome = nome
         self.horas = horas
 
-    def listar_semana(nome,horas):
+    def listar_semana(self):
         
 
 def menu_rankings(usuario_logado):

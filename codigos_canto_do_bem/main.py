@@ -12,36 +12,43 @@ from modulos.sistema_de_pontos import checkar_presenca,loja_de_pontos
 
 console = Console()
 
+class Menu:
+    def __init__(self,nome, *funcoes):
+        self.nome = nome
+        self.opcoes = []
+        for x in funcoes:
+            self.opcoes.append(x)
+             
 
-def menu_principal():
-    while True:
-        console.print(Panel("🌍 [bold cyan]Canto do Bem - Sistema de Voluntariado[/bold cyan]", expand=False))
-        console.print("1 - Cadastrar Usuário")
-        console.print("2 - Cadastrar ONG")
-        console.print("3 - Fazer Login")
-        console.print("4 - Sair")
-
-        opcao = input("\nEscolha uma opção: ").strip()
-
-        if opcao == "1":
-            cadastrar_usuario()
-        elif opcao == "2":
-            cadastrar_ong()
-        elif opcao == "3":
-            usuario_logado = login()
-            if usuario_logado:
-                if usuario_logado["tipo"] == "usuario":
-                    menu_usuario(usuario_logado)
-                elif usuario_logado["tipo"] == "ong":
-                    menu_ong(usuario_logado)
-        elif opcao == "4":
-            console.print("[bold yellow]Saindo do sistema... Até logo![/bold yellow]")
-            break
-        else:
-            console.print("[bold red]Opção inválida![/bold red]")
+    def escolha(self):
+        console.print(Panel(f"{self.nome}"))
+        for idx, i in enumerate(self.opcoes):
+            console.print(f"{idx} - {i[0]}")
+        console.print(f"{idx - 1} - Sair")
+        decisao = int(input("Escolha uma opção: "))
+        for u in 
 
 
-def menu_usuario(usuario_logado):
+
+
+
+
+
+menu_principal = Menu("🌍 [bold cyan]Canto do Bem - Sistema de Voluntariado[/bold cyan]")
+
+
+usuario_logado = menu_principal.escolha(usuario = ["Cadastrar Usuário", cadastrar_usuario], ong = ["Cadastrar ONG", cadastrar_ong], log = ["Fazer Login", login])
+if usuario_logado:
+    if usuario_logado["tipo"] == "usuario":
+        menu_usuario = Menu(f"👤 Menu do Usuário - {usuario_logado['nome']}")
+        menu_usuario.escolha(editar = ["Editar Perfil", editar_perfil, usuario_logado], ver = ["Ver Calendário Pessoal", ver_calendario, usuario_logado], adicionar = ["Adicionar Evento ao Calendário", adicionar_evento_calendario, usuario_logado], criar = ["Criar Evento", criar_evento, usuario_logado], pesquisar = ["Pesquisar por um Usuário/ONG", ] )
+
+    elif usuario_logado["tipo"] == "ong":
+        menu_ong(usuario_logado)
+
+
+
+
     while True:
         console.print(Panel(f"👤 Menu do Usuário - {usuario_logado['nome']}", style="bold cyan"))
         console.print("1 - Editar Perfil")

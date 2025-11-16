@@ -74,9 +74,8 @@ def checkar_presenca(usuario_logado):
 
                 evento_escolhido = eventos_passados[opcao - 2] 
                 
-
                 for usuario in dados["usuarios"]:
-                    for evento in usuario.get("historico_eventos", []): 
+                    for evento in usuario.get("eventos_marcados", []): 
 
                         if evento.get('nome') == evento_escolhido.get('nome') and evento.get('data') == evento_escolhido.get('data'):
 
@@ -89,7 +88,7 @@ def checkar_presenca(usuario_logado):
                     continue 
 
                 while True:
-                    console.print("\n[bold cyan]Usuários para dar presença:[/bold cyan]")
+                    console.print("\n[bold cyan]Usuários para confirmar presença:[/bold cyan]")
                     console.print("0 - Voltar")
                     for idx, presenca in enumerate(usuarios_presenca, 1):
                         console.print(f"{idx}. {presenca['nome']} - {presenca['email']}")
@@ -111,6 +110,12 @@ def checkar_presenca(usuario_logado):
                             entregador['Horas_de_servico'] += pontos_ganhos
                             
                             console.print(f"[bold green]Presença confirmada! {entregador['nome']} ganhou {pontos_ganhos} pontos![/bold green]")
+
+                            for idx,evento_remover in enumerate(entregador['eventos_marcados']):
+                                if evento_remover == evento_escolhido:
+                                    entregador['historico_eventos'].insert(0,evento_escolhido)
+                                    entregador['eventos_marcados'].pop(idx)
+                                    break
                             
                             usuarios_presenca.pop(escolha - 1)
 
@@ -149,6 +154,7 @@ def loja_de_pontos(usuario_logado):
         console.print("1 - Nossos produtos\n2 - Cupons de Descontoz\n3 - Ingressos\n4 - Produtos de nosso parceiros\n5 - Sair")
         try: 
             opcao = int(input("\nEscolha uma opção: "))
+            console.clear()
 
             if opcao == 1: 
                 lista_de_produtos(usuario_logado)

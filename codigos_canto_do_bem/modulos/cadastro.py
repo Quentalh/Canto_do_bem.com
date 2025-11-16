@@ -117,6 +117,7 @@ def cadastrar_usuario():
         "estado": estado,
         "interesses": [],
         "Horas_de_servico": 0,
+        "eventos_marcados": [],
         "historico_eventos":[],
         "eventos_criados": [],
         "historico_de_compras": [],

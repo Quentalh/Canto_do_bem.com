@@ -9,6 +9,7 @@ from modulos.perfil import editar_perfil
 from modulos.calendario import ver_calendario, adicionar_evento_calendario
 from modulos.pesquisa import menu_pesquisa
 from modulos.sistema_de_pontos import checkar_presenca,loja_de_pontos
+from modulos.rankings import menu_rankings
 
 console = Console()
 
@@ -51,9 +52,11 @@ def menu_usuario(usuario_logado):
         console.print('5 - Pesquisar por um usuário/ONG')
         console.print("6 - Checagem de presença")
         console.print("7 - Loja de pontos")
-        console.print("8 - Sair")
+        console.print("8 - Verificar Rankings")
+        console.print("9 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
+        console.clear()
 
         if opcao == "1":
             editar_perfil(usuario_logado)
@@ -69,7 +72,9 @@ def menu_usuario(usuario_logado):
             checkar_presenca(usuario_logado)
         elif opcao == "7":
             loja_de_pontos(usuario_logado)
-        elif opcao == '8':
+        elif opcao == "8":
+            menu_rankings(usuario_logado)
+        elif opcao == '9':
             console.print('Sair')
             break
         else:
@@ -84,6 +89,7 @@ def menu_ong(ong_logada):
         console.print("3 - Sair")
 
         opcao = input("\nEscolha uma opção: ").strip()
+        console.clear()
 
         if opcao == "1":
             criar_evento(ong_logada)

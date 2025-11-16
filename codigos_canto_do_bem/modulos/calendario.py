@@ -1,30 +1,33 @@
 from rich.console import Console
 from rich.panel import Panel
 from auxiliares.json_auxiliares import carregar_dados, salvar_dados
-from datetime import datetime, date 
+from datetime import datetime
 
 console = Console()
-hoje = date.today()
+hoje = datetime.now().date()
 
 
 
 def ver_calendario(usuario_logado):
     console.print(Panel(f"Calendário de {usuario_logado['nome']}", style="bold cyan"))
 
-    if not usuario_logado.get("historico_eventos",[]):
+    if not usuario_logado.get("eventos_marcados",[]):
         console.print("[bold yellow]Você ainda não adicionou nenhum evento.[/bold yellow]")
     else:
         console.print('Eventos marcados:')
-        eventos_marcados = []
-        for  evento in usuario_logado.get("historico_eventos",[]):
-            evento_data = datetime.strptime(evento['data'], "%d/%m/%Y").date()
-            if evento_data > hoje:
-                eventos_marcados.append(evento)
-        for idx,disponivel in enumerate(eventos_marcados,1):
-            console.print(f"{idx}. {disponivel['nome']} - Criado por: {disponivel['criado_por']} (Data: {disponivel['data']} Horário: {disponivel['inicio']} até {disponivel["fim"]})")
+        for idx in range(len(usuario_logado.get('eventos_marcados',[])) - 1, -1, -1):
+            evento = usuario_logado.get('eventos_marcados',[])[idx]
+            evento_data = evento['data']
+            evento_data_obj = datetime.strptime(evento_data, "%d/%m/%Y")
+            diferenca = hoje - evento_data_obj.date()
+            if diferenca.days > 5:
+                usuario_logado.get('eventos_marcados',[]).pop(idx)
+        for idx,disponivel in enumerate(usuario_logado["eventos_marcados"],1):
+            console.print(f"{idx}. {disponivel['nome']} - Criado por: {disponivel['criado_por']} (Data: {disponivel['data']} Horário: {disponivel['inicio']} até {disponivel['fim']})")
 
 
     input("\nPressione ENTER para voltar...")
+    console.clear()
 
 
 def adicionar_evento_calendario(usuario_logado):
@@ -56,7 +59,7 @@ def adicionar_evento_calendario(usuario_logado):
     nome_evento_escolhido = evento_escolhido_obj["nome"]
 
     ja_participa = False
-    for item in usuario_logado["historico_eventos"]:
+    for item in usuario_logado["eventos_marcados"]:
         nome_na_lista = ""
         nome_na_lista = item.get("nome")
 
@@ -66,14 +69,10 @@ def adicionar_evento_calendario(usuario_logado):
 
     if ja_participa:
         console.print("[bold yellow]Você já está participando deste evento.[/bold yellow]")
+        console.clear()
         return
-
-    evento_para_adicionar = {
-        "nome": evento_escolhido_obj["nome"],
-        "data": evento_escolhido_obj["data"]
-    }
-
-    usuario_logado["historico_eventos"].append(evento_para_adicionar)
+    
+    usuario_logado["eventos_marcados"].append(evento_escolhido_obj)
 
     for u in dados["usuarios"]:
         if u["email"] == usuario_logado["email"]:
@@ -82,3 +81,4 @@ def adicionar_evento_calendario(usuario_logado):
 
     salvar_dados(dados)
     console.print(f"[bold green]Evento '{nome_evento_escolhido}' adicionado ao seu calendário![/bold green]")
+    console.clear()

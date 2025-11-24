@@ -10,15 +10,10 @@ import requests
 
 console = Console()
 
-
 def validar_email(email):
-    """Valida se o e-mail contém '@' e um formato simples"""
     return "@" in email and "." in email
 
-
 def validar_senha(senha):
-    """Verifica se a senha tem pelo menos 6 caracteres,
-    uma letra maiúscula, uma minúscula e um número."""
     if len(senha) < 6:
         return False
     tem_maiuscula = any(c.isupper() for c in senha)
@@ -27,16 +22,11 @@ def validar_senha(senha):
     return tem_maiuscula and tem_minuscula and tem_numero
 
 def buscar_cep(cep):
-
     url = f'https://viacep.com.br/ws/{cep}/json/'
-    
     try:
         response = requests.get(url)
         response.raise_for_status() 
-        
-        # Converte a resposta JSON em um dicionário Python
         data = response.json()
-        
         if "erro" in data:
             console.print("CEP não encontrado.")
             return False
@@ -46,19 +36,17 @@ def buscar_cep(cep):
         return False
     
 def validar_cep(cep):
-    
     if len(cep) != 8 or cep.isdigit() == False:
         return False
     else:
         if buscar_cep(cep):
             return True
 
-
 def cadastrar_usuario():
     dados = carregar_dados()
+    console.clear()
     console.print(Panel("Cadastro de Usuário", style="bold cyan"))
 
-    # valida nome (não pode repetir)
     while True:
         nome = input("Nome: ").strip()
         try:
@@ -71,7 +59,6 @@ def cadastrar_usuario():
         else:
             break
 
-    # valida e-mail
     while True:
         email = input("E-mail: ").strip()
         if not validar_email(email):
@@ -84,14 +71,11 @@ def cadastrar_usuario():
         else:
             break
 
-    # valida senha
     while True:
         senha = input("Senha: ").strip()
         if not validar_senha(senha):
             console.print("[bold red]Senha inválida![/bold red]")
-            console.print("A senha deve ter:")
-            console.print("- Pelo menos 6 caracteres")
-            console.print("- Uma letra maiúscula, uma minúscula e um número")
+            console.print("A senha deve ter: 6 caracteres, Maiúscula, Minúscula e Número")
         else:
             break
     
@@ -104,7 +88,6 @@ def cadastrar_usuario():
             cidade = endereco.get('localidade')
             estado = endereco.get('uf')
             console.print("[bold green]CEP encontrado com sucesso![/bold green]")
-
             break
         
     novo_usuario = {
@@ -121,22 +104,21 @@ def cadastrar_usuario():
         "historico_eventos":[],
         "eventos_criados": [],
         "historico_de_compras": [],
-        "Pontos": 0
+        "Pontos": 0,
+        "Medalhas": [],
     }
 
     dados["usuarios"].append(novo_usuario)
     salvar_dados(dados)
     console.print("[bold green]Usuário cadastrado com sucesso![/bold green]")
 
-
 def cadastrar_ong():
     dados = carregar_dados()
+    console.clear()
     console.print(Panel("Cadastro de ONG", style="bold cyan"))
 
-    # valida nome (não pode repetir)
     while True:
         nome = input("Nome da ONG: ").strip()
-        # Verifica na lista de 'ongs'
         if any(o["nome"].lower() == nome.lower() for o in dados["ongs"]):
             console.print("[bold red]Já existe uma ONG com esse nome.[/bold red]")
         elif nome == "":
@@ -144,29 +126,22 @@ def cadastrar_ong():
         else:
             break
 
-    # valida e-mail (Esta era a parte com o erro)
     while True:
         email = input("E-mail: ").strip()
         if not validar_email(email):
-            console.print("[bold red]E-mail inválido! Deve conter '@' e um formato válido.[/bold red]")
-        # Verifica se o e-mail já existe na lista 'ongs'
+            console.print("[bold red]E-mail inválido![/bold red]")
         elif any(o["email"] == email for o in dados["ongs"]):
             console.print("[bold red]E-mail já cadastrado.[/bold red]")
         else:
-            break # <-- A LINHA QUE FALTAVA!
+            break
 
-    # --- RESTANTE DA FUNÇÃO QUE FALTAVA ---
-
-    # valida senha (lógica copiada de 'cadastrar_usuario')
     while True:
         senha = input("Senha: ").strip()
         if not validar_senha(senha):
-            console.print("[bold red]Senha inválida![/bold red]")
-            console.print("A senha deve ter:")
-            console.print("- Pelo menos 6 caracteres")
-            console.print("- Uma letra maiúscula, uma minúscula e um número")
+            console.print("[bold red]Senha inválida! (Min 6 chars, Maiuscula, Minuscula, Numero)[/bold red]")
         else:
             break
+
     while True:
         cep = input("CEP (apenas numeros): ").strip()
         if not validar_cep(cep):
@@ -178,15 +153,10 @@ def cadastrar_ong():
             cidade = endereco.get('localidade')
             estado = endereco.get('uf')
             console.print("[bold green]CEP encontrado com sucesso![/bold green]")
-
             break
-        
-        
             
-    # Pede a descrição (campo específico da ONG)
     descricao = input("Descreva a ONG: ").strip()
 
-    # Cria o novo dicionário da ONG
     nova_ong = {
         "tipo": "ong",
         "nome": nome,
@@ -202,17 +172,6 @@ def cadastrar_ong():
         "eventos_criados": []
     }
 
-    # Adiciona a nova ONG à lista 'ongs' e salva
     dados["ongs"].append(nova_ong)
     salvar_dados(dados)
     console.print("[bold green]ONG cadastrada com sucesso![/bold green]")
-
-    if __name__ == "__main__":
-        opcao = int(input("Qual função vc quer testar? \n1-cadastro usuário \n2-cadastrar ong"))
-        try:
-            if opcao == "1":
-                cadastrar_usuario()
-            elif opcao == "2":
-                cadastrar_ong()
-        except ValueError:
-            console.print("Opção invalida")

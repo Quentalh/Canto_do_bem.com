@@ -1,6 +1,5 @@
 import os
 import sys
-
 CAMINHO_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if CAMINHO_RAIZ not in sys.path:
     sys.path.append(CAMINHO_RAIZ)
@@ -18,6 +17,7 @@ class Usuario_encontrado:
         self.cidade = cidade
         self.estado = estado
     def exibir(self):
+        console.clear()
         console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.cidade} - {self.estado}")
         input("\nPressione ENTER para voltar...")
 
@@ -32,6 +32,7 @@ class Ong_encontrada:
         self.cep = cep
         self.doacoes = 0
     def exibir(self):
+        console.clear()
         console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}\nCEP: {self.cep}")
         input("\nPressione ENTER para voltar...")
     def doar(self,usuario_logado):
@@ -39,254 +40,158 @@ class Ong_encontrada:
         console.print("[bold yellow]Lembrete: 1 Ponto = R$ 0,50 [/bold yellow]")
         while True:
             try:    
-                qnt = int(input(f"Quantos pontos você deseja doar para {self.nome}?\n(Digite uma letra para voltar)"))
+                qnt = int(input(f"Quantos pontos doar para {self.nome}? (Letra para voltar): "))
                 if usuario_logado['Pontos'] >= qnt:
-                    usuario_logado['Pontos'] = usuario_logado['Pontos'] - qnt
-                    doacao = qnt / 2
-                    self.doacoes = doacao
-                    return console.print(f"[bold green]Parabéns! você doou {qnt} pontos para {self.nome}[/bold green]")
+                    usuario_logado['Pontos'] -= qnt
+                    self.doacoes = qnt / 2
+                    console.print(f"[bold green]Parabéns! você doou {qnt} pontos para {self.nome}[/bold green]")
+                    input("Enter...")
+                    return
                 else:
-                    console.print("Você não tem pontos suficientes para efetuar essa doação, tente novamente com uma quantidade menor.")
-                    continue
+                    console.print("Pontos insuficientes.")
             except ValueError:
                 return
-
-            
-    
-
-
 
 def listar_estados_unicos():
     dados = carregar_dados()
     estados = set()
-    
     for entidade in dados.get("usuarios", []) + dados.get("ongs", []):
-        estado = entidade.get("estado")
-        if estado:
-            estados.add(estado)
-            
-    return (list(estados))
+        if entidade.get("estado"): estados.add(entidade.get("estado"))
+    return list(estados)
 
 def listar_cidades_unicas_por_estado(estado_escolhido):
     dados = carregar_dados()
     cidades = set()
-    
     for entidade in dados.get("usuarios", []) + dados.get("ongs", []):
-        if entidade.get("estado") == estado_escolhido:
-            cidade = entidade.get("cidade")
-            if cidade:
-                cidades.add(cidade)
-                
-    return (list(cidades))
+        if entidade.get("estado") == estado_escolhido and entidade.get("cidade"):
+            cidades.add(entidade.get("cidade"))
+    return list(cidades)
 
 def listar_entidades_por_local(estado, cidade):
     dados = carregar_dados()
-    entidades_encontradas = {
-        "usuarios": [],
-        "ongs": []
-    }
-
-    for usuario in dados.get("usuarios", []):
-        if usuario.get("estado") == estado and usuario.get("cidade") == cidade:
-            entidades_encontradas["usuarios"].append(usuario)
-    
-    for ong in dados.get("ongs", []):
-        if ong.get("estado") == estado and ong.get("cidade") == cidade:
-            entidades_encontradas["ongs"].append(ong)
-            
-    return entidades_encontradas
-
+    entidades = {"usuarios": [], "ongs": []}
+    for u in dados.get("usuarios", []):
+        if u.get("estado") == estado and u.get("cidade") == cidade: entidades["usuarios"].append(u)
+    for o in dados.get("ongs", []):
+        if o.get("estado") == estado and o.get("cidade") == cidade: entidades["ongs"].append(o)
+    return entidades
 
 def pesquisa_local(usuario_logado):
     dados = carregar_dados()
-    console.print(Panel("Pesquisa por Localização", style="bold cyan"))
-
-    estados_disponiveis = listar_estados_unicos()
+    
+    estados = listar_estados_unicos()
     while True:
-        if not estados_disponiveis:
-            console.print("[bold yellow]Nenhum estado encontrado no cadastro de usuários ou ONGs.[/bold yellow]")
-
-        console.print("\n[bold]Passo 1: Escolha o Estado[/bold]")
-        for idx, estado in enumerate(estados_disponiveis, 1):
-            console.print(f"{idx}. {estado}")
-
-        try:
-            escolha_estado_idx = int(input("\nDigite o número do estado: ").strip())
-            if not (1 <= escolha_estado_idx <= len(estados_disponiveis)):
-                console.print("[bold red]Número inválido.[/bold red]")
-                return
-
-            estado_selecionado = estados_disponiveis[escolha_estado_idx - 1]
-
-        except ValueError:
-            console.print("[bold red]Entrada inválida. Por favor, use um número.[/bold red]")
+        console.clear()
+        console.print(Panel("Pesquisa por Localização", style="bold cyan"))
+        if not estados:
+            console.print("Nenhum estado encontrado.")
+            input("Enter...")
             return
 
-        cidades_disponiveis = listar_cidades_unicas_por_estado(estado_selecionado)
-
-        console.print(f"\n[bold]Passo 2: Escolha a Cidade em {estado_selecionado}[/bold]")
-        for idx, cidade in enumerate(cidades_disponiveis, 1):
-            console.print(f"{idx}. {cidade}")
-
-        try:
-            escolha_cidade_idx = int(input("\nDigite o número da cidade: ").strip())
-            if not (1 <= escolha_cidade_idx <= len(cidades_disponiveis)):
-                console.print("[bold red]Número inválido.[/bold red]")
-                return
-
-            cidade_selecionada = cidades_disponiveis[escolha_cidade_idx - 1]
-
-        except ValueError:
-            console.print("[bold red]Entrada inválida. Por favor, use um número.[/bold red]")
-            return
+        console.print("Passo 1: Escolha o Estado")
+        for idx, estado in enumerate(estados, 1): console.print(f"{idx}. {estado}")
         
-        console.print(f"\n--- Resultados para [bold green]{cidade_selecionada}, {estado_selecionado}[/bold green] ---")
+        try:
+            idx = int(input("\nNúmero do estado (0 sair): ").strip())
+            if idx == 0: return
+            if not (1 <= idx <= len(estados)): continue
+            estado_sel = estados[idx - 1]
+        except ValueError: continue
 
-        resultados = listar_entidades_por_local(estado_selecionado, cidade_selecionada)
+        cidades = listar_cidades_unicas_por_estado(estado_sel)
+        console.clear()
+        console.print(f"Passo 2: Escolha a Cidade em {estado_sel}")
+        for idx, cidade in enumerate(cidades, 1): console.print(f"{idx}. {cidade}")
 
+        try:
+            idx = int(input("\nNúmero da cidade: ").strip())
+            if not (1 <= idx <= len(cidades)): continue
+            cidade_sel = cidades[idx - 1]
+        except ValueError: continue
+        
         while True:
+            console.clear()
+            resultados = listar_entidades_por_local(estado_sel, cidade_sel)
+            console.print(f"--- {cidade_sel}, {estado_sel} ---")
+            console.print("1- Usuário comum \n2- ONG \n3- Voltar")
             try:
-                console.print("Digite qual o tipo de usuário você deseja encontrar: \n\n1- Usuário comum \n2- ONG")
-                escolha_tipo = int(input("Digite o numero correspondente a uma das opções: "))
-                if escolha_tipo == 1:
-                    console.print("\n[bold cyan]Usuários encontrados:[/bold cyan]")
-                    for idx, usuario in enumerate(resultados["usuarios"], 1):
-                        console.print(f"{idx} - {usuario['nome']} (Email: {usuario['email']})")
-                    try:
-                        escolha = int(input("Digite o número do usuário para ver mais informações: "))
-                        if 1 <= escolha <= len(resultados["usuarios"]):
-                            usuario_escolhido = resultados["usuarios"][escolha - 1]
-                            usuario_exibir = Usuario_encontrado(usuario_escolhido.get("nome"), usuario_escolhido.get("email"), usuario_escolhido.get("cidade"), usuario_escolhido.get("estado"))
-                            console.print(f"[bold green]Usuário encontrado![/bold green]")
-                            usuario_exibir.exibir()
-                            return
-                        else:
-                            console.print("[bold red]Número inválido.[/bold red]")
-                    except ValueError:
-                        console.print("[bold red]Entrada inválida.[/bold red]")
-                    break
+                tipo = int(input("Opção: "))
+                if tipo == 3: break
+                
+                if tipo == 1:
+                    console.clear()
+                    for i, u in enumerate(resultados["usuarios"], 1):
+                        console.print(f"{i} - {u['nome']} ({u['email']})")
+                    sel = int(input("Ver info de nº (0 voltar): "))
+                    if 1 <= sel <= len(resultados["usuarios"]):
+                        u_sel = resultados["usuarios"][sel-1]
+                        Usuario_encontrado(u_sel["nome"], u_sel["email"], u_sel["cidade"], u_sel["estado"]).exibir()
 
-                elif escolha_tipo == 2:
-                    console.print("\n[bold cyan]ONGs encontradas:[/bold cyan]")
-                    for idx, ong in enumerate(resultados["ongs"], 1):
-                        console.print(f"{idx} - {ong['nome']} (Email: {ong['email']})")
-                    try:
-                        escolha = int(input("Digite o número da ONG para ver mais informações: "))
-                        if 1 <= escolha <= len(resultados["ongs"]):
-                            ong_escolhida = resultados["ongs"][escolha - 1]
-                            ong_exibir = Ong_encontrada(ong_escolhida.get("nome"), ong_escolhida.get("email"), ong_escolhida.get("logradouro"), ong_escolhida.get("bairro"), ong_escolhida.get("cidade"), ong_escolhida.get("estado"), ong_escolhida.get("cep"))
-                            console.print(f"[bold green]ONG encontrada![/bold green]")
-                            console.print("Oque você deseja fazer?\n\n1 - Exibir detalhes da ONG\n2 - Doar para a ONG\n3 - Sair")
-                            while True:
-                                try:
-                                    acao = int(input("Escolha uma opção: "))
-                                    if acao == 1:
-                                        ong_exibir.exibir()
-                                    elif acao == 2:
-                                        ong_exibir.doar(usuario_logado)
-                                        ong_escolhida['doacoes_recebidas'] = ong_exibir.doacoes
-                                        for u in dados["usuarios"]:
-                                            if u["email"] == usuario_logado["email"]:
-                                                u.update(usuario_logado)
-                                        for i in dados ["ongs"]:
-                                            if i["email"] == ong_escolhida['email']:
-                                                i.update(ong_escolhida)
-                                        salvar_dados(dados)
-                                        return
-                                    elif acao == 3:
-                                        return
-                                except ValueError:
-                                    console.print("Opção inválida, tente novamente.")                            
-                        else:
-                            console.print("[bold red]Número inválido.[/bold red]")
-                    except ValueError:
-                        console.print("[bold red]Entrada inválida.[/bold red]")
-                    break
-                else:
-                    console.print("[bold red]Opção inválida.[/bold red]")
-            except ValueError:
-                console.print("Opção inválida")
-            break
+                elif tipo == 2:
+                    console.clear()
+                    for i, o in enumerate(resultados["ongs"], 1):
+                        console.print(f"{i} - {o['nome']} ({o['email']})")
+                    sel = int(input("Ver info de nº (0 voltar): "))
+                    if 1 <= sel <= len(resultados["ongs"]):
+                        o_sel = resultados["ongs"][sel-1]
+                        ong_obj = Ong_encontrada(o_sel["nome"], o_sel["email"], o_sel["logradouro"], o_sel["bairro"], o_sel["cidade"], o_sel["estado"], o_sel["cep"])
+                        
+                        console.clear()
+                        console.print("1 - Detalhes\n2 - Doar\n3 - Voltar")
+                        acao = int(input("Opção: "))
+                        if acao == 1: ong_obj.exibir()
+                        elif acao == 2:
+                            ong_obj.doar(usuario_logado)
+                            for o_global in dados["ongs"]:
+                                if o_global["email"] == o_sel["email"]:
+                                    o_global['doacoes_recebidas'] = ong_obj.doacoes
+                            for u_global in dados["usuarios"]:
+                                if u_global["email"] == usuario_logado["email"]:
+                                    u_global.update(usuario_logado)
+                            salvar_dados(dados)
+
+            except ValueError: pass
 
 def menu_pesquisa(usuario_logado):
     dados = carregar_dados() 
-
     while True:
+        console.clear()
         console.print(Panel("Menu de Pesquisa", style="bold cyan"))
         console.print("1- Pesquisar por Nome (Usuário)")
         console.print("2- Pesquisar por Nome (ONG)")
-        console.print("3- Pesquisar por Localização (Estado -> Cidade)")
-        console.print("4- Voltar ao menu anterior")
+        console.print("3- Pesquisar por Localização")
+        console.print("4- Voltar")
 
         try:
-            opcao = int(input("\nEscolha uma opção: ").strip())
+            opcao = int(input("\nOpção: ").strip())
             
             if opcao == 1:
-                console.print(Panel("Pesquisa de Usuário por Nome/Email", style="bold cyan" ))
-                nome = input("\nNome do usuário: ").strip()
-                email = input("\nE-mail do usuário: ").strip()
-                
-                usuariop = next((u for u in dados["usuarios"] if u["email"] == email and u["nome"] == nome), None)
-                
-                if usuariop:
-                        usuario_exibir = Usuario_encontrado(usuariop.get("nome"), usuariop.get("email"), usuariop.get("cidade"), usuariop.get("estado"))
-                        console.print(f"[bold green]Usuário encontrado![/bold green]")
-                        usuario_exibir.exibir()
+                console.clear()
+                nome = input("Nome: ").strip()
+                email = input("Email: ").strip()
+                u = next((x for x in dados["usuarios"] if x["email"] == email and x["nome"] == nome), None)
+                if u: Usuario_encontrado(u["nome"], u["email"], u["cidade"], u["estado"]).exibir()
                 else: 
-                    console.print('\n[bold red]Nenhum usuário encontrado[/bold red]\n')
+                    console.print("[red]Não encontrado[/red]")
+                    input("Enter...")
 
             elif opcao == 2:
-                console.print(Panel("Pesquisa de ONG por Nome/Email", style="bold cyan" ))
-                nome = input("\nNome da ONG: ").strip()
-                email = input("\nE-mail público da ONG: ").strip()
-
-                ongp = next((o for o in dados["ongs"] if o["email"] == email and o["nome"] == nome), None)
-                
-                if ongp:
-                        ong_exibir = Ong_encontrada(ongp.get("nome"), ongp.get("email"), ongp.get("logradouro"), ongp.get("bairro"), ongp.get("cidade"), ongp.get("estado"), ongp.get("cep"))
-                        console.print(f"[bold green]ONG encontrada![/bold green]")
-                        console.print("Oque você deseja fazer?\n\n1 - Exibir detalhes da ONG\n2 - Doar para a ONG\n3 - Sair")
-                        while True:
-                            try:
-                                acao = int(input("Escolha uma opção: "))
-                                if acao == 1:
-                                    ong_exibir.exibir()
-                                elif acao == 2:
-                                    ong_exibir.doar(usuario_logado)
-                                    ongp['doacoes_recebidas'] = ong_exibir.doacoes
-                                    for u in dados["usuarios"]:
-                                        if u["email"] == usuario_logado["email"]:
-                                            u.update(usuario_logado)
-                                            break
-                                    salvar_dados(dados)
-                                elif acao == 3:
-                                    return
-                            except ValueError:
-                                console.print("Opção inválida, tente novamente.")
-
-                else: 
-                    console.print('\n[bold red]Nenhuma ONG encontrada[/bold red]\n')
+                console.clear()
+                nome = input("Nome ONG: ").strip()
+                email = input("Email: ").strip()
+                o = next((x for x in dados["ongs"] if x["email"] == email and x["nome"] == nome), None)
+                if o:
+                    ong = Ong_encontrada(o["nome"], o["email"], o["logradouro"], o["bairro"], o["cidade"], o["estado"], o["cep"])
+                    console.print("1-Exibir 2-Doar")
+                    if input("Opção: ") == "1": ong.exibir()
+                    else:
+                        ong.doar(usuario_logado)
+                        salvar_dados(dados)
+                else:
+                    console.print("[red]Não encontrado[/red]")
+                    input("Enter...")
             
-            elif opcao == 3:
-                pesquisa_local(usuario_logado)
-            
-            elif opcao == 4:
-                break
-            
-            else:
-                console.print("[bold red]Opção inválida.[/bold red]")
+            elif opcao == 3: pesquisa_local(usuario_logado)
+            elif opcao == 4: break
         
-        except ValueError:
-            console.print("[bold red]Entrada inválida. Por favor, digite um número (1-4).[/bold red]")
-
-if __name__ == "__main__":
-    opcao = int(input("Qual função vc quer testar? \n1-listar_estados_unicos \n2-pesquisa_local \n3-menu_pesquisa"))
-    try:
-        if opcao == 1:
-            listar_estados_unicos()
-        elif opcao == 2:
-            pesquisa_local()
-        elif opcao == 3:
-            menu_pesquisa()
-    except ValueError:
-            console.print("Opção invalida")
+        except ValueError: pass

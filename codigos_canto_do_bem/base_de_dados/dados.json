@@ -2,247 +2,144 @@
     "usuarios": [
         {
             "tipo": "usuario",
-            "nome": "Ana Silva",
-            "email": "ana@exemplo.com",
-            "senha": "Senha123",
-            "cep": "01001000",
-            "cidade": "São Paulo",
-            "estado": "SP",
+            "nome": "Vencedor Atual",
+            "email": "vencedor@teste.com",
+            "senha": "123",
+            "cep": "12345678",
+            "cidade": "Lisboa",
+            "estado": "LS",
             "interesses": [
-                "meio ambiente",
-                "educação"
+                "Voluntariado"
             ],
-            "Horas_de_servico": 3.0,
-            "eventos_marcados": [
+            "Horas_de_servico": 20.0,
+            "Pontos": 0,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
                 {
-                    "nome": "Oficina de Reciclagem",
-                    "descricao": "Aprenda a reciclar e reutilizar materiais.",
-                    "inicio": "14:00:00",
-                    "fim": "17:00:00",
-                    "horas_total": 3.0,
-                    "data": "25/11/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Semanal (Semana 3)!",
+                    "data": "24/11/2025 17:59",
+                    "lida": true
                 },
                 {
-                    "nome": "Mutirão de Limpeza SP",
-                    "descricao": "Limpeza do Parque Ibirapuera.",
-                    "inicio": "09:00:00",
-                    "fim": "12:00:00",
-                    "horas_total": 3.0,
-                    "data": "10/10/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Mensal (Janeiro)!",
+                    "data": "24/11/2025 17:59",
+                    "lida": true
                 }
             ],
-            "historico_eventos": [
-                {
-                    "nome": "Mutirão de Limpeza SP",
-                    "descricao": "Limpeza do Parque Ibirapuera.",
-                    "inicio": "09:00:00",
-                    "fim": "12:00:00",
-                    "horas_total": 3.0,
-                    "data": "10/10/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
-                }
-            ],
-            "eventos_criados": [
-                {
-                    "nome": "Plante uma Árvore",
-                    "descricao": "Evento de plantio de mudas.",
-                    "inicio": "08:00:00",
-                    "fim": "13:00:00",
-                    "horas_total": 5.0,
-                    "data": "20/11/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "Ana Silva",
-                    "tipo_criador": "usuario"
-                }
-            ],
-            "historico_de_compras": [
-                "1x Ecobag, custo = 15"
-            ],
-            "Pontos": 15
-        },
-        {
-            "tipo": "usuario",
-            "nome": "Bruno Costa",
-            "email": "bruno@exemplo.com",
-            "senha": "Senha456",
-            "cep": "20031000",
-            "cidade": "Rio de Janeiro",
-            "estado": "RJ",
-            "interesses": [
-                "ajudar animais"
-            ],
-            "Horas_de_servico": 4.0,
-            "eventos_marcados": [
-                {
-                    "nome": "Feira de Adoção Pet",
-                    "descricao": "Encontre seu novo melhor amigo.",
-                    "inicio": "10:00:00",
-                    "fim": "16:00:00",
-                    "horas_total": 6.0,
-                    "data": "30/11/2025",
-                    "cidade": "Rio de Janeiro",
-                    "criado_por": "Patas Douradas",
-                    "tipo_criador": "ong"
-                }
-            ],
-            "historico_eventos": [
-                {
-                    "nome": "Dia de Cão",
-                    "descricao": "Passeio e cuidados com cães de abrigo.",
-                    "inicio": "10:00:00",
-                    "fim": "14:00:00",
-                    "horas_total": 4.0,
-                    "data": "15/10/2025",
-                    "cidade": "Rio de Janeiro",
-                    "criado_por": "Patas Douradas",
-                    "tipo_criador": "ong"
-                }
-            ],
-            "eventos_criados": [],
             "historico_de_compras": [],
-            "Pontos": 40
-        },
-        {
-            "tipo": "usuario",
-            "nome": "Carla Dias",
-            "email": "carla@exemplo.com",
-            "senha": "Senha789",
-            "cep": "50030000",
-            "cidade": "Recife",
-            "estado": "PE",
-            "interesses": [
-                "cultura",
-                "educação"
-            ],
-            "Horas_de_servico": 0,
-            "eventos_marcados": [
-                {
-                    "nome": "Oficina de Reciclagem",
-                    "descricao": "Aprenda a reciclar e reutilizar materiais.",
-                    "inicio": "14:00:00",
-                    "fim": "17:00:00",
-                    "horas_total": 3.0,
-                    "data": "25/11/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
-                }
-            ],
-            "historico_eventos": [],
-            "eventos_criados": [],
-            "historico_de_compras": [],
-            "Pontos": 0
-        },
-        {
-            "tipo": "usuario",
-            "nome": "Daniel Moreira",
-            "email": "daniel@exemplo.com",
-            "senha": "Senha101",
-            "cep": "01001000",
-            "cidade": "São Paulo",
-            "estado": "SP",
-            "interesses": [
-                "meio ambiente"
-            ],
-            "Horas_de_servico": 3.0,
             "eventos_marcados": [],
             "historico_eventos": [
                 {
-                    "nome": "Mutirão de Limpeza SP",
-                    "descricao": "Limpeza do Parque Ibirapuera.",
-                    "inicio": "09:00:00",
-                    "fim": "12:00:00",
-                    "horas_total": 3.0,
-                    "data": "10/10/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
+                    "nome": "Evento Janeiro 2025",
+                    "horas_total": 20.0,
+                    "data": "15/01/2025",
+                    "tipo_criador": "ong",
+                    "cidade": "Lisboa"
                 }
             ],
-            "eventos_criados": [],
+            "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Participante 2024",
+            "email": "antigo@teste.com",
+            "senha": "123",
+            "cep": "87654321",
+            "cidade": "Porto",
+            "estado": "PT",
+            "interesses": [],
+            "Horas_de_servico": 50.0,
+            "Pontos": 10,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Anual (2024)!",
+                    "data": "24/11/2025 17:47",
+                    "lida": false
+                }
+            ],
             "historico_de_compras": [],
-            "Pontos": 30
+            "eventos_marcados": [],
+            "historico_eventos": [
+                {
+                    "nome": "Grande Ação 2024",
+                    "horas_total": 50.0,
+                    "data": "10/05/2024",
+                    "tipo_criador": "ong",
+                    "cidade": "Porto"
+                }
+            ],
+            "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Rival Fraco",
+            "email": "rival@teste.com",
+            "senha": "123",
+            "cep": "11111111",
+            "cidade": "Lisboa",
+            "estado": "LS",
+            "interesses": [],
+            "Horas_de_servico": 5.0,
+            "Pontos": 0,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥈 Prata no Ranking Mensal (Janeiro)!",
+                    "data": "24/11/2025 17:47",
+                    "lida": false
+                }
+            ],
+            "historico_de_compras": [],
+            "eventos_marcados": [],
+            "historico_eventos": [
+                {
+                    "nome": "Evento Janeiro 2025",
+                    "horas_total": 5.0,
+                    "data": "15/01/2025",
+                    "tipo_criador": "ong",
+                    "cidade": "Lisboa"
+                }
+            ],
+            "eventos_criados": []
         }
     ],
     "ongs": [
         {
             "tipo": "ong",
-            "nome": "SP Verde",
-            "email": "contato@spverde.org",
-            "senha": "Ong123",
-            "cep": "01311000",
-            "logradouro": "Avenida Paulista",
-            "bairro": "Bela Vista",
-            "cidade": "São Paulo",
-            "estado": "SP",
-            "descricao": "ONG dedicada à arborização e limpeza de São Paulo.",
+            "nome": "ONG Teste",
+            "email": "ong@teste.com",
+            "senha": "123",
+            "cep": "22222222",
+            "logradouro": "Rua Principal",
+            "bairro": "Centro",
+            "cidade": "Lisboa",
+            "estado": "LS",
+            "descricao": "ONG para testes.",
             "doacoes_recebidas": 0,
+            "notificacoes": [],
             "eventos_criados": [
                 {
-                    "nome": "Mutirão de Limpeza SP",
-                    "descricao": "Limpeza do Parque Ibirapuera.",
-                    "inicio": "09:00:00",
-                    "fim": "12:00:00",
-                    "horas_total": 3.0,
-                    "data": "10/10/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
+                    "nome": "Evento Janeiro 2025",
+                    "descricao": "Evento teste",
+                    "inicio": "08:00:00",
+                    "fim": "18:00:00",
+                    "horas_total": 10.0,
+                    "data": "15/01/2025",
+                    "cidade": "Lisboa",
                     "tipo_criador": "ong"
                 },
                 {
-                    "nome": "Oficina de Reciclagem",
-                    "descricao": "Aprenda a reciclar e reutilizar materiais.",
-                    "inicio": "14:00:00",
-                    "fim": "17:00:00",
-                    "horas_total": 3.0,
-                    "data": "25/11/2025",
-                    "cidade": "São Paulo",
-                    "criado_por": "SP Verde",
-                    "tipo_criador": "ong"
-                }
-            ]
-        },
-        {
-            "tipo": "ong",
-            "nome": "Patas Douradas",
-            "email": "contato@patasdouradas.org",
-            "senha": "Ong456",
-            "cep": "22041001",
-            "logradouro": "Rua Barata Ribeiro",
-            "bairro": "Copacabana",
-            "cidade": "Rio de Janeiro",
-            "estado": "RJ",
-            "descricao": "ONG de resgate e adoção de animais.",
-            "doacoes_recebidas": 0,
-            "eventos_criados": [
-                {
-                    "nome": "Dia de Cão",
-                    "descricao": "Passeio e cuidados com cães de abrigo.",
-                    "inicio": "10:00:00",
-                    "fim": "14:00:00",
-                    "horas_total": 4.0,
-                    "data": "15/10/2025",
-                    "cidade": "Rio de Janeiro",
-                    "criado_por": "Patas Douradas",
-                    "tipo_criador": "ong"
-                },
-                {
-                    "nome": "Feira de Adoção Pet",
-                    "descricao": "Encontre seu novo melhor amigo.",
-                    "inicio": "10:00:00",
-                    "fim": "16:00:00",
-                    "horas_total": 6.0,
-                    "data": "30/11/2025",
-                    "cidade": "Rio de Janeiro",
-                    "criado_por": "Patas Douradas",
+                    "nome": "Grande Ação 2024",
+                    "descricao": "Evento passado",
+                    "inicio": "08:00:00",
+                    "fim": "18:00:00",
+                    "horas_total": 10.0,
+                    "data": "10/05/2024",
+                    "cidade": "Porto",
                     "tipo_criador": "ong"
                 }
             ]
@@ -250,59 +147,193 @@
     ],
     "eventos": [
         {
-            "nome": "Mutirão de Limpeza SP",
-            "descricao": "Limpeza do Parque Ibirapuera.",
-            "inicio": "09:00:00",
-            "fim": "12:00:00",
-            "horas_total": 3.0,
-            "data": "10/10/2025",
-            "cidade": "São Paulo",
-            "criado_por": "SP Verde",
-            "tipo_criador": "ong"
-        },
-        {
-            "nome": "Dia de Cão",
-            "descricao": "Passeio e cuidados com cães de abrigo.",
-            "inicio": "10:00:00",
-            "fim": "14:00:00",
-            "horas_total": 4.0,
-            "data": "15/10/2025",
-            "cidade": "Rio de Janeiro",
-            "criado_por": "Patas Douradas",
-            "tipo_criador": "ong"
-        },
-        {
-            "nome": "Plante uma Árvore",
-            "descricao": "Evento de plantio de mudas.",
+            "nome": "Evento Janeiro 2025",
+            "descricao": "Evento teste",
             "inicio": "08:00:00",
-            "fim": "13:00:00",
-            "horas_total": 5.0,
-            "data": "20/11/2025",
-            "cidade": "São Paulo",
-            "criado_por": "Ana Silva",
-            "tipo_criador": "usuario"
-        },
-        {
-            "nome": "Oficina de Reciclagem",
-            "descricao": "Aprenda a reciclar e reutilizar materiais.",
-            "inicio": "14:00:00",
-            "fim": "17:00:00",
-            "horas_total": 3.0,
-            "data": "25/11/2025",
-            "cidade": "São Paulo",
-            "criado_por": "SP Verde",
+            "fim": "18:00:00",
+            "horas_total": 10.0,
+            "data": "15/01/2025",
+            "cidade": "Lisboa",
+            "criado_por": "ONG Teste",
             "tipo_criador": "ong"
         },
         {
-            "nome": "Feira de Adoção Pet",
-            "descricao": "Encontre seu novo melhor amigo.",
-            "inicio": "10:00:00",
-            "fim": "16:00:00",
-            "horas_total": 6.0,
-            "data": "30/11/2025",
-            "cidade": "Rio de Janeiro",
-            "criado_por": "Patas Douradas",
+            "nome": "Grande Ação 2024",
+            "descricao": "Evento passado",
+            "inicio": "08:00:00",
+            "fim": "18:00:00",
+            "horas_total": 10.0,
+            "data": "10/05/2024",
+            "cidade": "Porto",
+            "criado_por": "ONG Teste",
             "tipo_criador": "ong"
         }
-    ]
+    ],
+    "rankings_semanais": {
+        "Semana 1": [],
+        "Semana 2": [],
+        "Semana 3": [
+            [
+                "Vencedor Atual",
+                20.0
+            ],
+            [
+                "Rival Fraco",
+                5.0
+            ]
+        ],
+        "Semana 4": [],
+        "Semana 5": [],
+        "Semana 6": [],
+        "Semana 7": [],
+        "Semana 8": [],
+        "Semana 9": [],
+        "Semana 10": [],
+        "Semana 11": [],
+        "Semana 12": [],
+        "Semana 13": [],
+        "Semana 14": [],
+        "Semana 15": [],
+        "Semana 16": [],
+        "Semana 17": [],
+        "Semana 18": [],
+        "Semana 19": [],
+        "Semana 20": [],
+        "Semana 21": [],
+        "Semana 22": [],
+        "Semana 23": [],
+        "Semana 24": [],
+        "Semana 25": [],
+        "Semana 26": [],
+        "Semana 27": [],
+        "Semana 28": [],
+        "Semana 29": [],
+        "Semana 30": [],
+        "Semana 31": [],
+        "Semana 32": [],
+        "Semana 33": [],
+        "Semana 34": [],
+        "Semana 35": [],
+        "Semana 36": [],
+        "Semana 37": [],
+        "Semana 38": [],
+        "Semana 39": [],
+        "Semana 40": [],
+        "Semana 41": [],
+        "Semana 42": [],
+        "Semana 43": [],
+        "Semana 44": [],
+        "Semana 45": [],
+        "Semana 46": []
+    },
+    "rankings_mensais": {
+        "Janeiro": [
+            [
+                "Vencedor Atual",
+                20.0
+            ],
+            [
+                "Rival Fraco",
+                5.0
+            ]
+        ],
+        "Fevereiro": [],
+        "Março": [],
+        "Abril": [],
+        "Maio": [],
+        "Junho": [],
+        "Julho": [],
+        "Agosto": [],
+        "Setembro": [],
+        "Outubro": []
+    },
+    "rankings_anos": {
+        "2024": {
+            "ranking_anual": [
+                [
+                    "Participante 2024",
+                    50.0
+                ]
+            ],
+            "rankings_mensais": {
+                "Janeiro": [],
+                "Fevereiro": [],
+                "Março": [],
+                "Abril": [],
+                "Maio": [
+                    [
+                        "Participante 2024",
+                        50.0
+                    ]
+                ],
+                "Junho": [],
+                "Julho": [],
+                "Agosto": [],
+                "Setembro": [],
+                "Outubro": [],
+                "Novembro": [],
+                "Dezembro": []
+            },
+            "rankings_semanais": {
+                "1ª Semana": [],
+                "2ª Semana": [],
+                "3ª Semana": [],
+                "4ª Semana": [],
+                "5ª Semana": [],
+                "6ª Semana": [],
+                "7ª Semana": [],
+                "8ª Semana": [],
+                "9ª Semana": [],
+                "10ª Semana": [],
+                "11ª Semana": [],
+                "12ª Semana": [],
+                "13ª Semana": [],
+                "14ª Semana": [],
+                "15ª Semana": [],
+                "16ª Semana": [],
+                "17ª Semana": [],
+                "18ª Semana": [],
+                "19ª Semana": [
+                    [
+                        "Participante 2024",
+                        50.0
+                    ]
+                ],
+                "20ª Semana": [],
+                "21ª Semana": [],
+                "22ª Semana": [],
+                "23ª Semana": [],
+                "24ª Semana": [],
+                "25ª Semana": [],
+                "26ª Semana": [],
+                "27ª Semana": [],
+                "28ª Semana": [],
+                "29ª Semana": [],
+                "30ª Semana": [],
+                "31ª Semana": [],
+                "32ª Semana": [],
+                "33ª Semana": [],
+                "34ª Semana": [],
+                "35ª Semana": [],
+                "36ª Semana": [],
+                "37ª Semana": [],
+                "38ª Semana": [],
+                "39ª Semana": [],
+                "40ª Semana": [],
+                "41ª Semana": [],
+                "42ª Semana": [],
+                "43ª Semana": [],
+                "44ª Semana": [],
+                "45ª Semana": [],
+                "46ª Semana": [],
+                "47ª Semana": [],
+                "48ª Semana": [],
+                "49ª Semana": [],
+                "50ª Semana": [],
+                "51ª Semana": [],
+                "52ª Semana": [],
+                "53ª Semana": []
+            }
+        }
+    }
 }

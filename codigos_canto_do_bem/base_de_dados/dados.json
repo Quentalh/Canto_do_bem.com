@@ -2,58 +2,380 @@
     "usuarios": [
         {
             "tipo": "usuario",
-            "nome": "exemplo",
-            "email": "exemplo@.com",
-            "senha": "Senha123",
+            "nome": "Vencedor Atual",
+            "email": "vencedor@teste.com",
+            "senha": "123",
+            "cep": "12345678",
+            "cidade": "Lisboa",
+            "estado": "LS",
+            "interesses": [
+                "Voluntariado"
+            ],
+            "Horas_de_servico": 20.0,
+            "Pontos": 0,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Semanal (Semana 3)!",
+                    "data": "24/11/2025 17:59",
+                    "lida": true
+                },
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Mensal (Janeiro)!",
+                    "data": "24/11/2025 17:59",
+                    "lida": true
+                }
+            ],
+            "historico_de_compras": [],
+            "eventos_marcados": [],
+            "historico_eventos": [
+                {
+                    "nome": "Evento Janeiro 2025",
+                    "horas_total": 20.0,
+                    "data": "15/01/2025",
+                    "tipo_criador": "ong",
+                    "cidade": "Lisboa"
+                }
+            ],
+            "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Participante 2024",
+            "email": "antigo@teste.com",
+            "senha": "123",
+            "cep": "87654321",
+            "cidade": "Porto",
+            "estado": "PT",
+            "interesses": [],
+            "Horas_de_servico": 50.0,
+            "Pontos": 10,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥇 Ouro no Ranking Anual (2024)!",
+                    "data": "24/11/2025 17:47",
+                    "lida": false
+                }
+            ],
+            "historico_de_compras": [],
+            "eventos_marcados": [],
+            "historico_eventos": [
+                {
+                    "nome": "Grande Ação 2024",
+                    "horas_total": 50.0,
+                    "data": "10/05/2024",
+                    "tipo_criador": "ong",
+                    "cidade": "Porto"
+                }
+            ],
+            "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Rival Fraco",
+            "email": "rival@teste.com",
+            "senha": "123",
+            "cep": "11111111",
+            "cidade": "Lisboa",
+            "estado": "LS",
+            "interesses": [],
+            "Horas_de_servico": 5.0,
+            "Pontos": 0,
+            "Medalhas": [],
+            "anos_participados": [],
+            "notificacoes": [
+                {
+                    "mensagem": "🏆 Você ganhou a Medalha de 🥈 Prata no Ranking Mensal (Janeiro)!",
+                    "data": "24/11/2025 17:47",
+                    "lida": false
+                }
+            ],
+            "historico_de_compras": [],
+            "eventos_marcados": [],
+            "historico_eventos": [
+                {
+                    "nome": "Evento Janeiro 2025",
+                    "horas_total": 5.0,
+                    "data": "15/01/2025",
+                    "tipo_criador": "ong",
+                    "cidade": "Lisboa"
+                }
+            ],
+            "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Heitor",
+            "email": "heitorquental321@gmail.com",
+            "senha": "Heitor2007",
             "cep": "51160035",
             "cidade": "Recife",
             "estado": "PE",
             "interesses": [],
+            "Horas_de_servico": 0,
+            "eventos_marcados": [],
             "historico_eventos": [],
-            "eventos_criados": [
-                {
-                    "nome": "exemploevento",
-                    "descricao": "mimimi",
-                    "inicio": "12:00:00",
-                    "fim": "18:00:00",
-                    "horas_total": 6.0,
-                    "data": "20/10/2025",
-                    "cidade": "Recife",
-                    "criado_por": "exemplo",
-                    "tipo_criador": "usuario"
-                }
-            ],
+            "eventos_criados": [],
             "historico_de_compras": [],
-            "Pontos": 25
+            "Pontos": 0,
+            "Medalhas": [],
+            "notificacoes": [],
+            "email_verificado": true,
+            "codigo_verificacao": null,
+            "anos_participados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "joao",
+            "email": "j@.com",
+            "senha": "Joao2000",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": [],
+            "Horas_de_servico": 0,
+            "eventos_marcados": [],
+            "historico_eventos": [],
+            "eventos_criados": [],
+            "historico_de_compras": [],
+            "Pontos": 0,
+            "Medalhas": [],
+            "notificacoes": [],
+            "email_verificado": true,
+            "codigo_verificacao": null,
+            "anos_participados": []
         }
     ],
     "ongs": [
         {
             "tipo": "ong",
-            "nome": "exemplo2",
-            "email": "exemplo2@.com",
-            "senha": "Senha123",
-            "cep": "51160035",
-            "logradouro": "Rua Le Parc",
-            "bairro": "Imbiribeira",
-            "cidade": "Recife",
-            "estado": "PE",
-            "descricao": "exemplo",
-            "doacoes_recebidas": 12.5,
-            "eventos_criados": []
+            "nome": "ONG Teste",
+            "email": "ong@teste.com",
+            "senha": "123",
+            "cep": "22222222",
+            "logradouro": "Rua Principal",
+            "bairro": "Centro",
+            "cidade": "Lisboa",
+            "estado": "LS",
+            "descricao": "ONG para testes.",
+            "doacoes_recebidas": 0,
+            "notificacoes": [],
+            "eventos_criados": [
+                {
+                    "nome": "Evento Janeiro 2025",
+                    "descricao": "Evento teste",
+                    "inicio": "08:00:00",
+                    "fim": "18:00:00",
+                    "horas_total": 10.0,
+                    "data": "15/01/2025",
+                    "cidade": "Lisboa",
+                    "tipo_criador": "ong"
+                },
+                {
+                    "nome": "Grande Ação 2024",
+                    "descricao": "Evento passado",
+                    "inicio": "08:00:00",
+                    "fim": "18:00:00",
+                    "horas_total": 10.0,
+                    "data": "10/05/2024",
+                    "cidade": "Porto",
+                    "tipo_criador": "ong"
+                }
+            ]
         }
     ],
     "eventos": [
         {
-            "nome": "exemploevento",
-            "descricao": "mimimi",
-            "inicio": "12:00:00",
+            "nome": "Evento Janeiro 2025",
+            "descricao": "Evento teste",
+            "inicio": "08:00:00",
             "fim": "18:00:00",
-            "horas_total": 6.0,
-            "data": "20/11/2025",
-            "cidade": "Recife",
-            "criado_por": "exemplo",
-            "tipo_criador": "usuario"
+            "horas_total": 10.0,
+            "data": "15/01/2025",
+            "cidade": "Lisboa",
+            "criado_por": "ONG Teste",
+            "tipo_criador": "ong"
+        },
+        {
+            "nome": "Grande Ação 2024",
+            "descricao": "Evento passado",
+            "inicio": "08:00:00",
+            "fim": "18:00:00",
+            "horas_total": 10.0,
+            "data": "10/05/2024",
+            "cidade": "Porto",
+            "criado_por": "ONG Teste",
+            "tipo_criador": "ong"
         }
-    ]
+    ],
+    "rankings_semanais": {
+        "Semana 1": [],
+        "Semana 2": [],
+        "Semana 3": [
+            [
+                "Vencedor Atual",
+                20.0
+            ],
+            [
+                "Rival Fraco",
+                5.0
+            ]
+        ],
+        "Semana 4": [],
+        "Semana 5": [],
+        "Semana 6": [],
+        "Semana 7": [],
+        "Semana 8": [],
+        "Semana 9": [],
+        "Semana 10": [],
+        "Semana 11": [],
+        "Semana 12": [],
+        "Semana 13": [],
+        "Semana 14": [],
+        "Semana 15": [],
+        "Semana 16": [],
+        "Semana 17": [],
+        "Semana 18": [],
+        "Semana 19": [],
+        "Semana 20": [],
+        "Semana 21": [],
+        "Semana 22": [],
+        "Semana 23": [],
+        "Semana 24": [],
+        "Semana 25": [],
+        "Semana 26": [],
+        "Semana 27": [],
+        "Semana 28": [],
+        "Semana 29": [],
+        "Semana 30": [],
+        "Semana 31": [],
+        "Semana 32": [],
+        "Semana 33": [],
+        "Semana 34": [],
+        "Semana 35": [],
+        "Semana 36": [],
+        "Semana 37": [],
+        "Semana 38": [],
+        "Semana 39": [],
+        "Semana 40": [],
+        "Semana 41": [],
+        "Semana 42": [],
+        "Semana 43": [],
+        "Semana 44": [],
+        "Semana 45": [],
+        "Semana 46": []
+    },
+    "rankings_mensais": {
+        "Janeiro": [
+            [
+                "Vencedor Atual",
+                20.0
+            ],
+            [
+                "Rival Fraco",
+                5.0
+            ]
+        ],
+        "Fevereiro": [],
+        "Março": [],
+        "Abril": [],
+        "Maio": [],
+        "Junho": [],
+        "Julho": [],
+        "Agosto": [],
+        "Setembro": [],
+        "Outubro": []
+    },
+    "rankings_anos": {
+        "2024": {
+            "ranking_anual": [
+                [
+                    "Participante 2024",
+                    50.0
+                ]
+            ],
+            "rankings_mensais": {
+                "Janeiro": [],
+                "Fevereiro": [],
+                "Março": [],
+                "Abril": [],
+                "Maio": [
+                    [
+                        "Participante 2024",
+                        50.0
+                    ]
+                ],
+                "Junho": [],
+                "Julho": [],
+                "Agosto": [],
+                "Setembro": [],
+                "Outubro": [],
+                "Novembro": [],
+                "Dezembro": []
+            },
+            "rankings_semanais": {
+                "1ª Semana": [],
+                "2ª Semana": [],
+                "3ª Semana": [],
+                "4ª Semana": [],
+                "5ª Semana": [],
+                "6ª Semana": [],
+                "7ª Semana": [],
+                "8ª Semana": [],
+                "9ª Semana": [],
+                "10ª Semana": [],
+                "11ª Semana": [],
+                "12ª Semana": [],
+                "13ª Semana": [],
+                "14ª Semana": [],
+                "15ª Semana": [],
+                "16ª Semana": [],
+                "17ª Semana": [],
+                "18ª Semana": [],
+                "19ª Semana": [
+                    [
+                        "Participante 2024",
+                        50.0
+                    ]
+                ],
+                "20ª Semana": [],
+                "21ª Semana": [],
+                "22ª Semana": [],
+                "23ª Semana": [],
+                "24ª Semana": [],
+                "25ª Semana": [],
+                "26ª Semana": [],
+                "27ª Semana": [],
+                "28ª Semana": [],
+                "29ª Semana": [],
+                "30ª Semana": [],
+                "31ª Semana": [],
+                "32ª Semana": [],
+                "33ª Semana": [],
+                "34ª Semana": [],
+                "35ª Semana": [],
+                "36ª Semana": [],
+                "37ª Semana": [],
+                "38ª Semana": [],
+                "39ª Semana": [],
+                "40ª Semana": [],
+                "41ª Semana": [],
+                "42ª Semana": [],
+                "43ª Semana": [],
+                "44ª Semana": [],
+                "45ª Semana": [],
+                "46ª Semana": [],
+                "47ª Semana": [],
+                "48ª Semana": [],
+                "49ª Semana": [],
+                "50ª Semana": [],
+                "51ª Semana": [],
+                "52ª Semana": [],
+                "53ª Semana": []
+            }
+        }
+    }
 }

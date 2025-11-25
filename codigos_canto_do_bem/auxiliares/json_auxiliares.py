@@ -9,7 +9,7 @@ CAMINHO_ARQUIVO = os.path.join(CAMINHO_RAIZ, "base_de_dados", "dados.json")
 def carregar_dados():
     """Carrega os dados do arquivo JSON. Se não existir, cria estrutura inicial."""
     if not os.path.exists(CAMINHO_ARQUIVO):
-        dados_iniciais = {"usuarios": [], "ongs": [], "eventos": []}
+        dados_iniciais = {"usuarios": [], "ongs": [], "eventos": [],"rankings_semanais":[],"rankings_mensais": [], "rankings_anos": {}}
         salvar_dados(dados_iniciais)
         return dados_iniciais
 
@@ -18,7 +18,7 @@ def carregar_dados():
             return json.load(f)
         except json.JSONDecodeError:
             # Se o arquivo estiver corrompido ou vazio
-            return {"usuarios": [], "ongs": [], "eventos": []}
+            return {"usuarios": [], "ongs": [], "eventos": [],"rankings_semanais":[],"rankings_mensais": [], "rankings_anos": {}}
 
 
 def salvar_dados(dados):
@@ -30,6 +30,6 @@ def salvar_dados(dados):
 
 def limpar_dados():
     """Zera completamente o banco de dados."""
-    dados_vazios = {"usuarios": [], "ongs": [], "eventos": []}
+    dados_vazios = {"usuarios": [], "ongs": [], "eventos": [],"rankings_semanais":[],"rankings_mensais": [], "rankings_anos": {}}
     salvar_dados(dados_vazios)
     print("✅ Banco de dados limpo com sucesso!")

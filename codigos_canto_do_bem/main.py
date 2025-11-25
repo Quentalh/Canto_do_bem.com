@@ -39,19 +39,22 @@ def menu_principal():
             cadastrar_ong()
             input("Pressione Enter para continuar...")
         elif opcao == "3":
-            dados_cru = login()
-            if dados_cru:
-                if dados_cru['tipo'] == 'usuario':
-                    user = Usuario(dados_cru)
-                    bonus = user.processar_recompensas_anuais(ano_passado)
+            entidade_logada = login()
+            
+            if entidade_logada:
+                if entidade_logada.tipo == 'usuario':
+                    bonus = entidade_logada.processar_recompensas_anuais(ano_passado)
+                    
                     if bonus > 0:
                         console.print(f"[bold green]Parabéns! Recebeu {bonus} pontos de bónus do ano passado![/bold green]")
                         input("Pressione Enter para continuar...")
-                    menu_usuario(user)
-                elif dados_cru['tipo'] == 'ong':
-                    menu_ong(ONG(dados_cru))
+                    
+                    menu_usuario(entidade_logada)
+                    
+                elif entidade_logada.tipo == 'ong':
+                    menu_ong(entidade_logada)
             else:
-                input("Pressione Enter para continuar...")
+                console.print("Verificação falhou e login não pode ser concluido")
         elif opcao == "4": 
             console.clear()
             break

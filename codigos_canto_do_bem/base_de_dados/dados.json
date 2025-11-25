@@ -105,6 +105,48 @@
                 }
             ],
             "eventos_criados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "Heitor",
+            "email": "heitorquental321@gmail.com",
+            "senha": "Heitor2007",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": [],
+            "Horas_de_servico": 0,
+            "eventos_marcados": [],
+            "historico_eventos": [],
+            "eventos_criados": [],
+            "historico_de_compras": [],
+            "Pontos": 0,
+            "Medalhas": [],
+            "notificacoes": [],
+            "email_verificado": true,
+            "codigo_verificacao": null,
+            "anos_participados": []
+        },
+        {
+            "tipo": "usuario",
+            "nome": "joao",
+            "email": "j@.com",
+            "senha": "Joao2000",
+            "cep": "51160035",
+            "cidade": "Recife",
+            "estado": "PE",
+            "interesses": [],
+            "Horas_de_servico": 0,
+            "eventos_marcados": [],
+            "historico_eventos": [],
+            "eventos_criados": [],
+            "historico_de_compras": [],
+            "Pontos": 0,
+            "Medalhas": [],
+            "notificacoes": [],
+            "email_verificado": true,
+            "codigo_verificacao": null,
+            "anos_participados": []
         }
     ],
     "ongs": [

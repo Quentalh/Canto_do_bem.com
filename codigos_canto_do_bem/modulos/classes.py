@@ -1,6 +1,10 @@
 import sys
 import os
 from datetime import datetime, timedelta, date
+import random
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 CAMINHO_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if CAMINHO_RAIZ not in sys.path:
@@ -13,6 +17,7 @@ from rich.panel import Panel
 console = Console()
 
 class Entidade:
+    """Classe base para Usuarios e ONGs."""
     def __init__(self, dados_dict):
         self.dados = dados_dict
         self.email = dados_dict.get('email')
@@ -22,6 +27,10 @@ class Entidade:
         self.dados.setdefault('cidade', '')
         self.dados.setdefault('estado', '')
         self.dados.setdefault('notificacoes', [])
+        
+        # Novos campos para Verificação de 2 Fatores
+        self.dados.setdefault('email_verificado', False)
+        self.dados.setdefault('codigo_verificacao', None)
 
     def salvar(self):
         todos_dados = carregar_dados()
@@ -38,15 +47,17 @@ class Entidade:
             salvar_dados(todos_dados)
 
     def adicionar_notificacao(self, mensagem):
+        """Adiciona uma nova notificação à lista."""
         nova_notificacao = {
             "mensagem": mensagem,
             "data": datetime.now().strftime("%d/%m/%Y %H:%M"),
             "lida": False
         }
-        self.dados['notificacoes'].insert(0, nova_notificacao)
+        self.dados['notificacoes'].insert(0, nova_notificacao) # Adiciona no topo
         self.salvar()
 
     def ver_notificacoes(self):
+        """Exibe as notificações e permite limpá-las."""
         console.clear()
         notificacoes = self.dados.get('notificacoes', [])
         
@@ -78,6 +89,89 @@ class Entidade:
             input("Pressione Enter...")
         
         console.clear()
+
+    def gerar_codigo_verificacao(self):
+        codigo = str(random.randint(100000, 999999))
+        self.dados['codigo_verificacao'] = codigo
+        self.salvar()
+
+        EMAIL_REMETENTE = "heitorquental321@gmail.com"
+        SENHA_APP = "jaflflqgqxkapccs"
+
+        console.print("[yellow]A preparar envio de e-mail seguro... aguarde.[/yellow]")
+
+        try:
+            if "seu_email_real" in EMAIL_REMETENTE:
+                raise ValueError("E-mail de remetente não configurado no código.")
+
+            msg = MIMEMultipart("alternative")
+            msg['Subject'] = f'Seu Código de Verificação: {codigo}'
+            msg['From'] = f"Canto do Bem <{EMAIL_REMETENTE}>"
+            msg['To'] = self.email
+
+            texto_simples = f"""\
+            Olá {self.nome},
+            
+            O seu código de verificação para o Canto do Bem é: {codigo}
+            
+            Se não solicitou este código, por favor ignore este e-mail.
+            """
+
+            html_conteudo = f"""\
+            <html>
+              <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                  <h2 style="color: #00bcd4; text-align: center;">Canto do Bem 🌍</h2>
+                  <hr style="border: 0; border-top: 1px solid #eee;">
+                  <p style="font-size: 16px; color: #333;">Olá, <strong>{self.nome}</strong>!</p>
+                  <p style="font-size: 16px; color: #555;">Use o código abaixo para verificar a sua conta e aceder ao sistema:</p>
+                  
+                  <div style="background-color: #e0f7fa; padding: 15px; text-align: center; border-radius: 5px; margin: 20px 0;">
+                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #006064;">{codigo}</span>
+                  </div>
+                  
+                  <p style="font-size: 14px; color: #777;">Este código é válido para o seu acesso atual.</p>
+                  <hr style="border: 0; border-top: 1px solid #eee;">
+                  <p style="font-size: 12px; color: #aaa; text-align: center;">© Canto do Bem - Sistema de Voluntariado</p>
+                </div>
+              </body>
+            </html>
+            """
+
+            part1 = MIMEText(texto_simples, "plain")
+            part2 = MIMEText(html_conteudo, "html")
+            msg.attach(part1)
+            msg.attach(part2)
+
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(EMAIL_REMETENTE, SENHA_APP)
+                smtp.send_message(msg)
+            
+            console.print(f"[bold green]📧 E-mail enviado com sucesso para {self.email}![/bold green]")
+
+        except Exception as e:
+            console.print(f"[bold red]Falha ao enviar e-mail real: {e}[/bold red]")
+            console.print("[yellow]Usando modo de simulação (Fallback):[/yellow]")
+            console.print(Panel(
+                f"📧 [bold]SIMULAÇÃO DE E-MAIL[/bold]\n\n"
+                f"Para: {self.email}\n"
+                f"Assunto: Código de Verificação\n\n"
+                f"Código: [bold green]{codigo}[/bold green]",
+                style="white on blue"
+            ))
+        
+        return codigo
+
+    def confirmar_email(self, codigo_usuario):
+        if not self.dados.get('codigo_verificacao'):
+            return False
+            
+        if str(codigo_usuario).strip() == str(self.dados['codigo_verificacao']):
+            self.dados['email_verificado'] = True
+            self.dados['codigo_verificacao'] = None 
+            self.salvar()
+            return True
+        return False
 
 class Usuario(Entidade):
     def __init__(self, dados_dict):

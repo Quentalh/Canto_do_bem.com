@@ -11,18 +11,49 @@ from rich.panel import Panel
 console = Console()
 
 class Usuario_encontrado:
-    def __init__ (self, nome, email, cidade, estado):
+    def __init__ (self, nome, email, cidade, estado, dados_completos):
         self.nome = nome
         self.email = email
         self.cidade = cidade
         self.estado = estado
+        self.dados = dados_completos
+
     def exibir(self):
         console.clear()
-        console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.cidade} - {self.estado}")
-        input("\nPressione ENTER para voltar...")
+        # Obtém a nota média, padrão é 0.0 se não existir
+        nota = self.dados.get('nota_media', 0.0)
+        estrelas = "⭐" * int(nota)
+        
+        console.print(f"Nome: {self.nome}")
+        console.print(f"Email: {self.email}")
+        console.print(f"Local: {self.cidade} - {self.estado}")
+        console.print(f"Nota: {nota:.1f} {estrelas}")
+        
+        console.print("\n1 - Ver Avaliações recebidas")
+        console.print("2 - Voltar")
+        
+        opt = input("Opção: ").strip()
+        if opt == "1":
+            self.listar_avaliacoes()
+
+    def listar_avaliacoes(self):
+        console.clear()
+        console.print(Panel(f"Avaliações de {self.nome}", style="bold yellow"))
+        avaliacoes = self.dados.get('avaliacoes', [])
+        
+        if not avaliacoes:
+            console.print("Nenhuma avaliação ainda.")
+        else:
+            for av in avaliacoes:
+                console.print(Panel(
+                    f"[bold]{av['autor']}[/bold] - Nota: {av['nota']} ⭐\n"
+                    f"\"{av['comentario']}\"",
+                    title=av.get('data', '')
+                ))
+        input("\nEnter para voltar...")
 
 class Ong_encontrada:
-    def __init__(self, nome, email, logradouro, bairro, cidade, estado, cep):
+    def __init__(self, nome, email, logradouro, bairro, cidade, estado, cep, dados_completos):
         self.nome = nome
         self.email = email
         self.logradouro = logradouro
@@ -31,10 +62,41 @@ class Ong_encontrada:
         self.estado = estado
         self.cep = cep
         self.doacoes = 0
+        self.dados = dados_completos
+
     def exibir(self):
         console.clear()
-        console.print(f"Nome: {self.nome}\nEmail: {self.email}\nLocal: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}\nCEP: {self.cep}")
-        input("\nPressione ENTER para voltar...")
+        nota = self.dados.get('nota_media', 0.0)
+        estrelas = "⭐" * int(nota)
+        
+        console.print(f"Nome: {self.nome} {estrelas} ({nota:.1f})")
+        console.print(f"Email: {self.email}")
+        console.print(f"Local: {self.logradouro} - {self.bairro} - {self.cidade} - {self.estado}")
+        console.print(f"CEP: {self.cep}")
+        
+        console.print("\n1 - Detalhes/Voltar")
+        console.print("2 - Ver Avaliações")
+        
+        opt = input("Opção: ").strip()
+        if opt == "2":
+            self.listar_avaliacoes()
+
+    def listar_avaliacoes(self):
+        console.clear()
+        console.print(Panel(f"Avaliações de {self.nome}", style="bold yellow"))
+        avaliacoes = self.dados.get('avaliacoes', [])
+        
+        if not avaliacoes:
+            console.print("Nenhuma avaliação ainda.")
+        else:
+            for av in avaliacoes:
+                console.print(Panel(
+                    f"[bold]{av['autor']}[/bold] (Evento: {av.get('evento', 'Geral')}) - Nota: {av['nota']} ⭐\n"
+                    f"\"{av['comentario']}\"",
+                    title=av.get('data', '')
+                ))
+        input("\nEnter para voltar...")
+
     def doar(self,usuario_logado):
         console.print(f"Seus Pontos: {usuario_logado['Pontos']}")
         console.print("[bold yellow]Lembrete: 1 Ponto = R$ 0,50 [/bold yellow]")
@@ -125,7 +187,8 @@ def pesquisa_local(usuario_logado):
                     sel = int(input("Ver info de nº (0 voltar): "))
                     if 1 <= sel <= len(resultados["usuarios"]):
                         u_sel = resultados["usuarios"][sel-1]
-                        Usuario_encontrado(u_sel["nome"], u_sel["email"], u_sel["cidade"], u_sel["estado"]).exibir()
+                        # AQUI ESTAVA O ERRO 1: Adicionado u_sel no final
+                        Usuario_encontrado(u_sel["nome"], u_sel["email"], u_sel["cidade"], u_sel["estado"], u_sel).exibir()
 
                 elif tipo == 2:
                     console.clear()
@@ -134,14 +197,17 @@ def pesquisa_local(usuario_logado):
                     sel = int(input("Ver info de nº (0 voltar): "))
                     if 1 <= sel <= len(resultados["ongs"]):
                         o_sel = resultados["ongs"][sel-1]
-                        ong_obj = Ong_encontrada(o_sel["nome"], o_sel["email"], o_sel["logradouro"], o_sel["bairro"], o_sel["cidade"], o_sel["estado"], o_sel["cep"])
+                        # AQUI ESTAVA O ERRO 2: Adicionado o_sel no final
+                        ong_obj = Ong_encontrada(o_sel["nome"], o_sel["email"], o_sel["logradouro"], o_sel["bairro"], o_sel["cidade"], o_sel["estado"], o_sel["cep"], o_sel)
                         
                         console.clear()
-                        console.print("1 - Detalhes\n2 - Doar\n3 - Voltar")
+                        # A classe Ong_encontrada agora tem o menu de avaliações, mas mantemos o menu de ações aqui
+                        console.print("1 - Detalhes e Avaliações\n2 - Doar\n3 - Voltar")
                         acao = int(input("Opção: "))
                         if acao == 1: ong_obj.exibir()
                         elif acao == 2:
                             ong_obj.doar(usuario_logado)
+                            # Atualiza dados globais após doação
                             for o_global in dados["ongs"]:
                                 if o_global["email"] == o_sel["email"]:
                                     o_global['doacoes_recebidas'] = ong_obj.doacoes
@@ -170,7 +236,9 @@ def menu_pesquisa(usuario_logado):
                 nome = input("Nome: ").strip()
                 email = input("Email: ").strip()
                 u = next((x for x in dados["usuarios"] if x["email"] == email and x["nome"] == nome), None)
-                if u: Usuario_encontrado(u["nome"], u["email"], u["cidade"], u["estado"]).exibir()
+                if u: 
+                    # Passa o utilizador 'u' completo
+                    Usuario_encontrado(u["nome"], u["email"], u["cidade"], u["estado"], u).exibir()
                 else: 
                     console.print("[red]Não encontrado[/red]")
                     input("Enter...")
@@ -181,8 +249,9 @@ def menu_pesquisa(usuario_logado):
                 email = input("Email: ").strip()
                 o = next((x for x in dados["ongs"] if x["email"] == email and x["nome"] == nome), None)
                 if o:
-                    ong = Ong_encontrada(o["nome"], o["email"], o["logradouro"], o["bairro"], o["cidade"], o["estado"], o["cep"])
-                    console.print("1-Exibir 2-Doar")
+                    # AQUI ESTAVA O ERRO 3: Passamos 'o' (ONG) em vez de 'u'
+                    ong = Ong_encontrada(o["nome"], o["email"], o["logradouro"], o["bairro"], o["cidade"], o["estado"], o["cep"], o)
+                    console.print("1-Exibir/Avaliações 2-Doar")
                     if input("Opção: ") == "1": ong.exibir()
                     else:
                         ong.doar(usuario_logado)

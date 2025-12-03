@@ -32,6 +32,10 @@ class Entidade:
         self.dados.setdefault('email_verificado', False)
         self.dados.setdefault('codigo_verificacao', None)
 
+        self.dados.setdefault('avaliacoes', []) # Lista de dicionários {autor, nota, comentario}
+        self.dados.setdefault('nota_media', 0.0)
+
+
     def salvar(self):
         todos_dados = carregar_dados()
         chave = "usuarios" if self.tipo == "usuario" else "ongs"
@@ -172,6 +176,21 @@ class Entidade:
             self.salvar()
             return True
         return False
+    def adicionar_avaliacao_entidade(self, autor_nome, nota, comentario):
+        """Adiciona uma avaliação e recalcula a média."""
+        nova_avaliacao = {
+            "autor": autor_nome,
+            "nota": float(nota),
+            "comentario": comentario,
+            "data": datetime.now().strftime("%d/%m/%Y")
+        }
+        self.dados['avaliacoes'].insert(0, nova_avaliacao)
+        
+        # Recalcular média
+        total_notas = sum(a['nota'] for a in self.dados['avaliacoes'])
+        self.dados['nota_media'] = total_notas / len(self.dados['avaliacoes'])
+        
+        self.salvar()
 
 class Usuario(Entidade):
     def __init__(self, dados_dict):

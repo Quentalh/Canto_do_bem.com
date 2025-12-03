@@ -229,10 +229,42 @@ def checkar_presenca(usuario_obj):
                             entregador['notificacoes'].insert(0, nova_msg)
 
                             console.print(f"[bold green]Presença confirmada! {entregador['nome']} ganhou {pontos_ganhos} pontos![/bold green]")
+
+                            console.print(Panel(f"Avaliação de {entregador['nome']}", style="bold yellow"))
+                            while True:
+                                try:
+                                    nota = int(input("Dê uma nota de 0 a 5 para o voluntário: "))
+                                    if 0 <= nota <= 5:
+                                        break
+                                    console.print("[red]A nota deve ser entre 0 e 5.[/red]")
+                                except ValueError:
+                                    console.print("[red]Digite apenas números.[/red]")
+                            
+                            comentario = input("Comentário (opcional, Enter para pular): ").strip()
+                            
+                            # Adicionar avaliação manualmente no dicionário do usuário alvo
+                            if 'avaliacoes' not in entregador: entregador['avaliacoes'] = []
+                            
+                            nova_avaliacao = {
+                                "autor": usuario_obj.nome, # Quem está avaliando (ONG ou Criador)
+                                "nota": float(nota),
+                                "comentario": comentario,
+                                "data": datetime.now().strftime("%d/%m/%Y")
+                            }
+                            entregador['avaliacoes'].insert(0, nova_avaliacao)
+                            
+                            # Recalcular média simples
+                            total = sum(a['nota'] for a in entregador['avaliacoes'])
+                            entregador['nota_media'] = total / len(entregador['avaliacoes'])
+                            
+                            console.print("[green]Avaliação registrada![/green]")
                             input("Pressione Enter para continuar...")
 
                             for idx, evento_remover in enumerate(entregador['eventos_marcados']):
                                 if evento_remover == evento_escolhido:
+                                    # IMPORTANTE: Marcar que este evento AINDA NÃO foi avaliado pelo usuário
+                                    evento_escolhido['status_avaliacao'] = "pendente" 
+                                    
                                     entregador['historico_eventos'].insert(0, evento_escolhido)
                                     entregador['eventos_marcados'].pop(idx)
                                     break

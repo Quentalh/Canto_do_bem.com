@@ -12,6 +12,7 @@ from modulos.calendario import ver_calendario, adicionar_evento_calendario
 from modulos.pesquisa import menu_pesquisa
 from modulos.sistema_de_pontos import checkar_presenca, LojaDePontos
 from modulos.rankings import menu_rankings, atualizar_rankings_sistema
+from modulos.avaliacoes import avaliar_ongs_pendentes
 
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -81,7 +82,8 @@ def menu_usuario(user):
         console.print("8 - Loja de pontos")
         console.print("9 - Verificar Rankings")
         console.print("10 - Ver suas Medalhas")
-        console.print("11 - Sair")
+        console.print("11 - Avaliar ONGs (Pendentes)")
+        console.print("12 - Sair")
 
         opt = input("\nOpção: ").strip()
 
@@ -113,8 +115,9 @@ def menu_usuario(user):
                                 f"Semanais (Total): {resumo['semanais']}\n"
                                 f"Mensais (Ouro/Prata/Bronze): {resumo['mensais']}\n"
                                 f"Anuais (Ouro/Prata/Bronze): {resumo['anuais']}", style="bold yellow"))
-            input("Voltar...")
-        elif opt == '11':
+        elif opt == "11":
+             avaliar_ongs_pendentes(user.dados)
+        elif opt == "12":
             console.clear()
             break
         else:

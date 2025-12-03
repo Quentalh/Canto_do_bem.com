@@ -7,6 +7,7 @@ if CAMINHO_RAIZ not in sys.path:
 from auxiliares.json_auxiliares import carregar_dados,salvar_dados
 from rich.console import Console
 from rich.panel import Panel
+from modulos.transparencia import visualizar_transparencia_ong_publico
 
 console = Console()
 
@@ -237,7 +238,7 @@ def menu_pesquisa(usuario_logado):
                 email = input("Email: ").strip()
                 u = next((x for x in dados["usuarios"] if x["email"] == email and x["nome"] == nome), None)
                 if u: 
-                    # Passa o utilizador 'u' completo
+                    
                     Usuario_encontrado(u["nome"], u["email"], u["cidade"], u["estado"], u).exibir()
                 else: 
                     console.print("[red]Não encontrado[/red]")
@@ -249,13 +250,23 @@ def menu_pesquisa(usuario_logado):
                 email = input("Email: ").strip()
                 o = next((x for x in dados["ongs"] if x["email"] == email and x["nome"] == nome), None)
                 if o:
-                    # AQUI ESTAVA O ERRO 3: Passamos 'o' (ONG) em vez de 'u'
                     ong = Ong_encontrada(o["nome"], o["email"], o["logradouro"], o["bairro"], o["cidade"], o["estado"], o["cep"], o)
-                    console.print("1-Exibir/Avaliações 2-Doar")
-                    if input("Opção: ") == "1": ong.exibir()
-                    else:
+                    
+                    console.print("1-Exibir/Avaliações 2-Doar 3-Portal de Transparência")
+                    
+                    sub_opcao = input("Opção: ").strip()
+                    
+                    if sub_opcao == "1": 
+                        ong.exibir()
+                    elif sub_opcao == "2":
                         ong.doar(usuario_logado)
                         salvar_dados(dados)
+                    elif sub_opcao == "3":
+                        
+                        visualizar_transparencia_ong_publico(o)
+                    else:
+                        console.print("[red]Opção inválida.[/red]")
+                        input("Enter...")
                 else:
                     console.print("[red]Não encontrado[/red]")
                     input("Enter...")

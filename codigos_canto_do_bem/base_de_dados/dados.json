@@ -185,6 +185,32 @@
                     "tipo_criador": "ong"
                 }
             ]
+        },
+        {
+            "tipo": "ong",
+            "nome": "ong ajuda pessoas",
+            "email": "phacastro18@gmail.com",
+            "senha": "Ajuda123",
+            "cep": "52050090",
+            "logradouro": "Rua Hoel Sette",
+            "bairro": "Jaqueira",
+            "cidade": "Recife",
+            "estado": "PE",
+            "descricao": "ong destinada a ajudar pessoas em situação vulnerável",
+            "doacoes_recebidas": 0,
+            "eventos_criados": [],
+            "notificacoes": [],
+            "email_verificado": true,
+            "codigo_verificacao": null,
+            "avaliacoes": [],
+            "nota_media": 0.0,
+            "transparencia": [
+                {
+                    "valor": 200.0,
+                    "descricao": "pagamento de comida para pessoas vulneráveis",
+                    "data": "03/12/2025"
+                }
+            ]
         }
     ],
     "eventos": [
@@ -266,7 +292,9 @@
         "Semana 43": [],
         "Semana 44": [],
         "Semana 45": [],
-        "Semana 46": []
+        "Semana 46": [],
+        "Semana 47": [],
+        "Semana 48": []
     },
     "rankings_mensais": {
         "Janeiro": [
@@ -287,7 +315,8 @@
         "Julho": [],
         "Agosto": [],
         "Setembro": [],
-        "Outubro": []
+        "Outubro": [],
+        "Novembro": []
     },
     "rankings_anos": {
         "2024": {

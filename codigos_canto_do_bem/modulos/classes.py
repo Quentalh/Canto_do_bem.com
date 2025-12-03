@@ -298,6 +298,7 @@ class ONG(Entidade):
         super().__init__(dados_dict)
         self.dados.setdefault('eventos_criados', [])
         self.dados.setdefault('doacoes_recebidas', 0)
+        self.dados.setdefault('transparencia', [])
         self.dados.setdefault('descricao', '')
         self.dados.setdefault('logradouro', '')
         self.dados.setdefault('bairro', '')
@@ -319,3 +320,18 @@ class ONG(Entidade):
         self.dados['eventos_criados'].append(evento_dict)
         self.adicionar_notificacao(f"Evento '{evento_dict['nome']}' criado com sucesso.")
         self.salvar()
+
+    def registrar_alocacao_doacao(self, valor: float, descricao: str, data: str):
+        """Método POO para criar e adicionar um novo registro de alocação de doação."""
+        registro = {
+            "valor": valor,
+            "descricao": descricao,
+            "data": data
+        }
+        
+        self.dados['transparencia'].insert(0, registro)
+
+    def obter_relatorio_transparencia(self):
+        """Retorna a lista de registros de transparência para exibição."""
+        return self.dados.get('transparencia', [])
+    

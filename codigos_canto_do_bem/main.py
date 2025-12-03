@@ -13,6 +13,7 @@ from modulos.pesquisa import menu_pesquisa
 from modulos.sistema_de_pontos import checkar_presenca, LojaDePontos
 from modulos.rankings import menu_rankings, atualizar_rankings_sistema
 from modulos.avaliacoes import avaliar_ongs_pendentes
+from modulos.transparencia import menu_gerenciar_transparencia
 
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -128,7 +129,11 @@ def menu_ong(ong):
     while True:
         console.clear()
         console.print(Panel(f"🏢 Menu ONG - {ong.nome}", style="bold cyan"))
-        console.print("1 - Criar Evento\n2 - Checagem de Presença\n3 - Sair")
+        console.print("1 - Criar Evento")
+        console.print("2 - Checagem de Presença")
+        console.print("3 - Gerenciar Portal de Transparência 📊") 
+        console.print("4 - Sair") 
+        
         opt = input("\nOpção: ").strip()
 
         if opt == "1": 
@@ -137,6 +142,8 @@ def menu_ong(ong):
         elif opt == "2": 
             checkar_presenca(ong)
         elif opt == "3": 
+            menu_gerenciar_transparencia(ong.dados)
+        elif opt == "4": 
             console.clear()
             break
         else:

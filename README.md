@@ -80,7 +80,7 @@ Nosso público-alvo é dividido em três grupos:
        * *Justificativa:* Auxilia na manipulação e visualização de calendários, facilitando a organização cronológica dos eventos para o usuário.
    * **`random` (Nativa):**
        * *Justificativa:* Utilizada para funcionalidades de gamificação (sorteios, distribuição de pontos) e geração de identificadores únicos quando necessário.
-* **`smtplib` (Nativa):**
+   * **`smtplib` (Nativa):**
        * *Justificativa:* Implementada para o sistema de notificações por e-mail (ex: confirmação de cadastro, recuperação de senha ou alertas de eventos).
 
    ### ⚙️ Execução do Projeto

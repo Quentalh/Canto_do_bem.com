@@ -6,45 +6,6 @@ O trabalho voluntário enfrenta desafios significativos, como a falta de organiz
 
 ![Image](https://github.com/user-attachments/assets/d638e13d-8744-4793-a5e5-45d4b1551941)
 
----
-
-## 🛠️ Documentação Técnica
-
-Este projeto foi construído utilizando a linguagem **Python**, com foco em modularidade, persistência de dados local e uma interface de linha de comando (CLI) amigável.
-
-### 📚 Bibliotecas e Dependências
-
-Foram utilizadas bibliotecas nativas e externas para otimizar o desenvolvimento e a experiência do utilizador (UX) no terminal.
-
-* **`rich` (Externa):**
-    * *Justificativa:* Utilizada para a construção da interface visual no terminal (CLI). A biblioteca permite o uso de painéis (`Panel`), cores e formatação de texto, tornando a navegação intuitiva e visualmente agradável, superando o padrão básico do terminal.
-    * *Componentes usados:* `Console`, `Panel`.
-* **`json` (Nativa):**
-    * *Justificativa:* Responsável pela persistência dos dados. O sistema utiliza um banco de dados baseado em arquivo (`dados.json`) para armazenar informações de utilizadores, ONGs e eventos, garantindo que os registos sejam mantidos entre execuções.
-* **`os` e `sys` (Nativas):**
-    * *Justificativa:* Essenciais para manipulação de caminhos de arquivos e diretórios (`os.path`). Garantem que o sistema encontre a base de dados e importe os módulos corretamente, independentemente do sistema operativo.
-* **`datetime` (Nativa):**
-    * *Justificativa:* Utilizada para validação temporal. O sistema impede o cadastro de eventos em datas passadas e gere o agendamento no calendário.
-
-### ⚙️ Execução do Projeto
-
-Para rodar o projeto localmente:
-
-1.  Instale a dependência externa:
-    ```bash
-    pip install rich
-    ```
-2.  Execute o sistema:
-    ```bash
-    python main.py
-    ```
-
-## 💡 Inovação Técnica
-
-O projeto inova ao introduzir conceitos de **Gestão Pessoal** no voluntariado via terminal. Diferente de scripts simples, o sistema oferece um **Calendário Personalizado**, permitindo que o voluntário faça a curadoria da sua própria agenda social, adicione eventos específicos ao seu perfil e acompanhe a sua participação.
-
----
-
 ## Qual a nossa Missão?
 
 Nossa missão é criar uma ponte entre cidadãos, voluntários e ONGs, incentivando a participação em ações sociais de forma organizada e eficiente. Queremos:
@@ -54,6 +15,14 @@ Nossa missão é criar uma ponte entre cidadãos, voluntários e ONGs, incentiva
 - **Motivar novos participantes** por meio de um sistema de recompensas gamificado, alcançando até mesmo aqueles que não têm interesse inicial em ativismo comunitário.
 - **Conectar pessoas** com valores e paixões em comum, fortalecendo laços e comunidades.
 - **Preencher uma lacuna de mercado**.
+
+---
+
+## 💡 Inovação Técnica
+
+* **Gestão Pessoal (Calendário):** Diferente de scripts simples, o sistema oferece um calendário personalizado, permitindo que o voluntário faça a curadoria da sua própria agenda social e acompanhe sua participação.
+* **Transparência de Recursos:** Implementação de um fluxo auditável para doações e recursos, garantindo visibilidade sobre o destino final das contribuições e aumentando a confiança dos doadores.
+* **Ecossistema de Confiança (Trust Score):** Um sistema de avaliação bilateral onde ONGs avaliam voluntários e vice-versa. Este mecanismo visa identificar e mitigar a presença de "maus atores", garantindo um ambiente seguro e de alto comprometimento para a comunidade.
 
 ---
 
@@ -89,24 +58,62 @@ Nosso público-alvo é dividido em três grupos:
 - **Voluntários Desmotivados**: Pessoas que buscam oportunidades e benefícios não monetários para retomar o interesse no trabalho voluntário.
 - **ONGs e Empresas**: Organizações que precisam de uma plataforma para gerenciar sua força de trabalho voluntária, conseguir mais engajamento e focar em suas missões.
 
-### 📂 Arquitetura e Organização dos Módulos
+## 🛠️ Documentação Técnica
 
-O sistema segue uma arquitetura modular para facilitar a manutenção:
+   ### 📚 Bibliotecas e Dependências
 
-```text
-codigos_canto_do_bem/
-│
-├── main.py                  # Ponto de entrada e Menu Principal
-├── auxiliares/              # Camada de Persistência
-│   └── json_auxiliares.py   # Leitura/Escrita no JSON
-│
-├── modulos/                 # Regra de Negócio
-│   ├── cadastro.py          # Validações e registo
-│   ├── login.py             # Autenticação
-│   ├── eventos.py           # Gestão de eventos
-│   ├── calendario.py        # Agenda pessoal
-│   └── perfil.py            # Edição de utilizador
-│
-└── base_de_dados/           # Dados
-    └── dados.json           # Armazenamento
+   Foram utilizadas bibliotecas nativas e externas para otimizar o desenvolvimento, a formatação de dados e a experiência do utilizador (UX).
+
+   * **`rich` (Externa):**
+       * *Justificativa:* Utilizada para a construção da interface visual no terminal (CLI). A biblioteca permite o uso de painéis (`Panel`), cores e formatação de texto, tornando a navegação intuitiva e visualmente agradável.
+   * **`requests` (Externa):**
+       * *Justificativa:* Essencial para realizar requisições HTTP e consumir a **API de CEP** (como ViaCEP). Isso permite o preenchimento automático de endereços e a validação de localização no cadastro de usuários e criação de eventos.
+   * **`json` (Nativa):**
+       * *Justificativa:* Responsável pela persistência dos dados. O sistema utiliza um banco de dados baseado em arquivo (`dados.json`) para armazenar informações de utilizadores, ONGs e eventos.
+   * **`os` e `sys` (Nativas):**
+       * *Justificativa:* Essenciais para manipulação de caminhos de arquivos, diretórios e importação de módulos no sistema operacional.
+   * **`datetime` (Nativa):**
+       * *Justificativa:* Utilizada para validação temporal, impedindo o cadastro de eventos em datas passadas e gerindo o agendamento.
+   * **`locale` (Nativa):**
+       * *Justificativa:* Garante a localização correta do sistema, formatando datas, horas e moedas para o padrão brasileiro (pt-BR).
+   * **`calendar` (Nativa):**
+       * *Justificativa:* Auxilia na manipulação e visualização de calendários, facilitando a organização cronológica dos eventos para o usuário.
+   * **`random` (Nativa):**
+       * *Justificativa:* Utilizada para funcionalidades de gamificação (sorteios, distribuição de pontos) e geração de identificadores únicos quando necessário.
+* **`smtplib` (Nativa):**
+       * *Justificativa:* Implementada para o sistema de notificações por e-mail (ex: confirmação de cadastro, recuperação de senha ou alertas de eventos).
+
+   ### ⚙️ Execução do Projeto
+
+   Para rodar o projeto localmente:
+
+   1.  Instale a dependência externa:
+       ```bash
+       pip install rich
+       ```
+   2.  Execute o sistema:
+       ```bash
+       python main.py
+       ```
+
+   ### 📂 Arquitetura e Organização dos Módulos
+
+   O sistema segue uma arquitetura modular para facilitar a manutenção:
+
+   ```text
+   codigos_canto_do_bem/
+   │
+   ├── main.py                  # Ponto de entrada e Menu Principal
+   ├── auxiliares/              # Camada de Persistência
+   │   └── json_auxiliares.py   # Leitura/Escrita no JSON
+   │
+   ├── modulos/                 # Regra de Negócio
+   │   ├── cadastro.py          # Validações e registo
+   │   ├── login.py             # Autenticação
+   │   ├── eventos.py           # Gestão de eventos
+   │   ├── calendario.py        # Agenda pessoal
+   │   └── perfil.py            # Edição de utilizador
+   │
+   └── base_de_dados/           # Dados
+       └── dados.json           # Armazenamento
 

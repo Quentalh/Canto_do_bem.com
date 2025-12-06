@@ -14,6 +14,7 @@ console = Console()
 
 def criar_evento(usuario_logado):
     dados = carregar_dados()
+    console.clear()
     console.print(Panel("Criação de Evento", style="bold cyan"))
 
     nome = input("Nome do evento: ").strip()
@@ -28,20 +29,36 @@ def criar_evento(usuario_logado):
 
             if data_evento < hoje:
                 console.print("[bold red]Não é possível registar um evento numa data que já passou.[/bold red]")
-                console.print("[bold red]Por favor, insira uma data futura.[/bold red]")
             else:
                 break
-
         except ValueError:
-
             console.print("[bold red]Formato de data inválido! Use dd/mm/aaaa.[/bold red]")
+            
+    while True:
+        try:
+            hora_inicio = datetime.strptime(input("Horário inicio (Ex: 13:00): "), "%H:%M").time()
+            hora_fim = datetime.strptime(input("Horário encerra (Ex: 18:00): "), "%H:%M").time()
 
+            if hora_inicio == hora_fim:
+                console.print("Horários iguais! Tente novamente")
+            else:
+                dt_inicio = datetime.combine(date.today(), hora_inicio)
+                dt_fim = datetime.combine(date.today(), hora_fim)
+                duracao = dt_fim - dt_inicio
+                total_segundos = duracao.total_seconds()
+                horas_total = total_segundos / 3600
+                break
+        except ValueError:
+            console.print("Formato inválido. Use HH:MM")
 
     cidade = input("Cidade: ").strip()
 
     evento = {
         "nome": nome,
         "descricao": descricao,
+        "inicio": hora_inicio.isoformat(),
+        "fim": hora_fim.isoformat(),
+        "horas_total": horas_total,
         "data": data_input,
         "cidade": cidade,
         "criado_por": usuario_logado["nome"],
@@ -50,26 +67,18 @@ def criar_evento(usuario_logado):
 
     dados["eventos"].append(evento)
 
+    if usuario_logado["tipo"] == "usuario":
+        for usuario in dados["usuarios"]:
+            if usuario["email"] == usuario_logado["email"]:
+                if "eventos_criados" not in usuario: usuario["eventos_criados"] = []
+                usuario["eventos_criados"].append(evento)
+
     if usuario_logado["tipo"] == "ong":
         for ong in dados["ongs"]:
             if ong["email"] == usuario_logado["email"]:
-                # Garante que a lista 'eventos_criados' existe
-                if "eventos_criados" not in ong:
-                    ong["eventos_criados"] = []
-                ong["eventos_criados"].append(nome)
+                if "eventos_criados" not in ong: ong["eventos_criados"] = []
+                ong["eventos_criados"].append(evento)
                 break
 
     salvar_dados(dados)
     console.print("[bold green]Evento criado com sucesso![/bold green]")
-
-
-# Bloco para testar o ficheiro diretamente
-if __name__ == "__main__":
-    usuario_teste_ong = {
-        "tipo": "ong",
-        "nome": "ONG de Teste",
-        "email": "ongteste@exemplo.com",
-        "eventos_criados": []
-    }
-    console.print("[bold yellow]A iniciar módulo de eventos em modo de teste...[/bold yellow]")
-    criar_evento(usuario_teste_ong)
